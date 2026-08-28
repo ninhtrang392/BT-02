@@ -1,0 +1,12 @@
+{
+  "basePath": "frames/hero-mobile",
+  "extension": "webp",
+  "pattern": "frame-00001.webp",
+  "frameCount": 81,
+  "version": "81-6775036",
+  "fps": 8,
+  "width": 960,
+  "quality": 72,
+  "source": "video/hero 3.mp4",
+  "duration": 10.125
+}

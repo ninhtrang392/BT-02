@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="vi" data-hero-scrub="on">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vivu Travel — Đặt tour du lịch trong nước & quốc tế</title>
+    <meta name="description" content="Đặt tour trọn gói: Hà Giang, Phú Quốc, Đà Nẵng, Nhật Bản… Giá minh bạch, xác nhận tức thì, hỗ trợ 24/7." />
+    <meta name="theme-color" content="#030c1a" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- Nét 100 (Thin) chỉ có một chỗ dùng: câu tuyên ngôn khổ lớn ở cảnh cảm
+         nhận. Thiếu nó trong danh sách này thì trình duyệt không báo lỗi mà lặng
+         lẽ hạ xuống nét gần nhất đang có (200) — chữ vẫn hiện, chỉ là không bao
+         giờ mảnh đúng như đã đặt trong CSS. -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    <link rel="preload" as="image" href="frames/hero/frame-00001.webp" fetchpriority="high" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>document.documentElement.classList.add('hero-motion-pending');</script>
+</head>
+
+<body>
+
+    <!-- Kho icon dùng chung cho CẢ trang: header, footer, biểu mẫu đăng ký.
+         Đặt ngay đầu <body> chứ KHÔNG nằm trong footer như trước — trang đăng
+         ký ẩn hẳn footer đi, mà ẩn bằng display:none thì cả cây <symbol> bên
+         trong coi như không tồn tại và mọi <use> trỏ vào nó ra hình trống.
+         Ở đây thì không khối nào ẩn được nó nữa. -->
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+            <defs>
+                <!-- ── ba lời hứa ở cột thương hiệu ── -->
+                <symbol id="fi-globe" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2"/>
+          <path d="M12 3.4c2.3 2.4 3.5 5.3 3.5 8.6S14.3 18.2 12 20.6C9.7 18.2 8.5 15.3 8.5 12S9.7 5.8 12 3.4Z"/>
+        </symbol>
+                <symbol id="fi-shield" viewBox="0 0 24 24">
+          <path d="M12 3.2 5.4 6v5.4c0 4.1 2.7 7.5 6.6 9.4 3.9-1.9 6.6-5.3 6.6-9.4V6L12 3.2Z"/>
+        </symbol>
+                <symbol id="fi-headset" viewBox="0 0 24 24">
+          <path d="M4.4 13.4v-1.2a7.6 7.6 0 0 1 15.2 0v1.2"/>
+          <path d="M4.4 13.4h1.9a1.1 1.1 0 0 1 1.1 1.1v3.3a1.1 1.1 0 0 1-1.1 1.1H5.5a1.1 1.1 0 0 1-1.1-1.1v-4.4Z"/>
+          <path d="M19.6 13.4h-1.9a1.1 1.1 0 0 0-1.1 1.1v3.3a1.1 1.1 0 0 0 1.1 1.1h1.9"/>
+          <path d="M19.6 18.9v.4a2.3 2.3 0 0 1-2.3 2.3h-3.9"/>
+        </symbol>
+
+                <!-- ── cột KHÁM PHÁ ── -->
+                <symbol id="fi-play" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.6"/><path d="m10.4 8.9 5 3.1-5 3.1V8.9Z"/>
+        </symbol>
+                <symbol id="fi-compass" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.6"/><path d="m15.2 8.8-1.9 4.5-4.5 1.9 1.9-4.5 4.5-1.9Z"/>
+        </symbol>
+                <symbol id="fi-pinuser" viewBox="0 0 24 24">
+          <circle cx="12" cy="7.4" r="3.1"/>
+          <path d="M5.6 20.4c1-3.5 3.4-5.3 6.4-5.3s5.4 1.8 6.4 5.3"/>
+        </symbol>
+                <symbol id="fi-guide" viewBox="0 0 24 24">
+          <rect x="4.2" y="3.8" width="15.6" height="16.4" rx="2.2"/>
+          <path d="M9.4 3.8v16.4"/><path d="M12.4 9h4.2"/><path d="M12.4 13h4.2"/>
+        </symbol>
+
+                <!-- ── cột HÀNH TRÌNH ── -->
+                <symbol id="fi-star" viewBox="0 0 24 24">
+          <path d="m12 3.6 2.6 5.3 5.8.85-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.85L12 3.6Z"/>
+        </symbol>
+                <!-- Nhật Bản: năm cánh hoa anh đào. Vẽ bằng năm vòng tròn chồng mép
+             chứ không phải năm path cánh: ở khổ 20px, cánh có eo hay không
+             cũng ra cùng một hình, mà năm vòng tròn thì sửa được bằng số. -->
+                <symbol id="fi-blossom" viewBox="0 0 24 24">
+          <circle cx="12" cy="6.9" r="2.9"/><circle cx="17" cy="10.5" r="2.9"/>
+          <circle cx="15.1" cy="16.4" r="2.9"/><circle cx="8.9" cy="16.4" r="2.9"/>
+          <circle cx="7" cy="10.5" r="2.9"/><circle cx="12" cy="12" r="1.1"/>
+        </symbol>
+                <symbol id="fi-gate" viewBox="0 0 24 24">
+          <path d="M2.8 8.2c3-2.4 6.1-3.6 9.2-3.6s6.2 1.2 9.2 3.6"/>
+          <path d="M4.4 8.2h15.2"/><path d="M6.6 10.6h10.8"/>
+          <path d="M7.2 10.6v9.6"/><path d="M16.8 10.6v9.6"/><path d="M12 12.8v7.4"/>
+        </symbol>
+                <symbol id="fi-temple" viewBox="0 0 24 24">
+          <path d="m12 2.8 2.8 4.4H9.2L12 2.8Z"/>
+          <path d="M8.2 11.6h7.6L14.4 7.2H9.6l-1.4 4.4Z"/>
+          <path d="M5.8 16.4h12.4l-1.7-4.8H7.5l-1.7 4.8Z"/>
+          <path d="M4.2 20.6h15.6"/><path d="M9.8 20.6v-4.2h4.4v4.2"/>
+        </symbol>
+                <symbol id="fi-castle" viewBox="0 0 24 24">
+          <path d="M3.4 20.4V7.6l2 1.6 2-1.6v3.2h9.2V7.6l2 1.6 2-1.6v12.8H3.4Z"/>
+          <path d="M10.2 20.4v-4.6h3.6v4.6"/>
+        </symbol>
+                <symbol id="fi-island" viewBox="0 0 24 24">
+          <path d="M12 9.6v8.2"/>
+          <path d="M12 9.6c-2.2-2-4.5-2-6.6 0"/><path d="M12 9.6c2.2-2 4.5-2 6.6 0"/>
+          <path d="M12 9.6c-.9-2.5 0-4.4 2.4-5.3"/>
+          <path d="M3 20.4c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0"/>
+        </symbol>
+                <symbol id="fi-mountain" viewBox="0 0 24 24">
+          <path d="M2.6 19.6h18.8L14 7.2l-3.1 5.1-2.2-2.9-6.1 10.2Z"/>
+          <path d="M12.2 12.1c.6.6 1.2.6 1.8 0s1.2-.6 1.8 0"/>
+        </symbol>
+
+                <!-- ── cột HỖ TRỢ ── -->
+                <symbol id="fi-book" viewBox="0 0 24 24">
+          <path d="M3.6 5h4.9A3.5 3.5 0 0 1 12 8.5v10.9a3 3 0 0 0-2.8-1.9H3.6V5Z"/>
+          <path d="M20.4 5h-4.9A3.5 3.5 0 0 0 12 8.5v10.9a3 3 0 0 1 2.8-1.9h5.6V5Z"/>
+        </symbol>
+                <symbol id="fi-card" viewBox="0 0 24 24">
+          <rect x="2.9" y="5.2" width="18.2" height="13.6" rx="2.6"/>
+          <path d="M2.9 9.9h18.2"/><path d="M6.4 14.6h4"/>
+        </symbol>
+                <symbol id="fi-shieldcheck" viewBox="0 0 24 24">
+          <path d="M12 3.2 5.4 6v5.4c0 4.1 2.7 7.5 6.6 9.4 3.9-1.9 6.6-5.3 6.6-9.4V6L12 3.2Z"/>
+          <path d="m9.2 11.8 2 2 3.6-3.9"/>
+        </symbol>
+                <symbol id="fi-phone" viewBox="0 0 24 24">
+          <path d="M20.9 16.9v2.1a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.3 19.3 0 0 1-6-6 19.6 19.6 0 0 1-3-8.6 2 2 0 0 1 2-2.2h2.1a2 2 0 0 1 2 1.7c.13 1 .36 1.9.68 2.8a2 2 0 0 1-.45 2.1L6.4 8.9a15.8 15.8 0 0 0 5.9 5.9l1.1-1.1a2 2 0 0 1 2.1-.45c.9.32 1.84.55 2.8.68a2 2 0 0 1 1.7 2Z"/>
+        </symbol>
+                <symbol id="fi-help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.6"/>
+          <path d="M9.6 9.6a2.5 2.5 0 0 1 4.9.7c0 1.7-2.5 2.2-2.5 3.5"/>
+          <path d="M12 16.7h.01"/>
+        </symbol>
+
+                <!-- ── khối bản tin ── -->
+                <symbol id="fi-mail" viewBox="0 0 24 24">
+          <rect x="2.9" y="5.2" width="18.2" height="13.6" rx="2.6"/>
+          <path d="m4 8 6.9 4.9a2 2 0 0 0 2.2 0L20 8"/>
+        </symbol>
+                <symbol id="fi-send" viewBox="0 0 24 24">
+          <path d="M21.4 2.6 2.6 10.2l7 2.9 2.9 7.2 8.9-17.7Z"/><path d="m9.6 13.1 4.5-4.5"/>
+        </symbol>
+                <symbol id="fi-lock" viewBox="0 0 24 24">
+          <rect x="4.6" y="10.2" width="14.8" height="9.8" rx="2.4"/>
+          <path d="M8 10.2V7.6a4 4 0 0 1 8 0v2.6"/>
+        </symbol>
+
+                <!-- ── khung đăng ký ──
+                     fi-user/eye/eye-off vẽ bằng nét như mọi icon khác. Ba glyph
+                     mạng xã hội thì NGƯỢC LẠI: chúng mang màu thương hiệu cứng
+                     trong chính path, không dùng currentColor — logo nhà cung
+                     cấp phải đúng màu của họ, tô lại theo màu trang là sai
+                     nhận diện và người dùng cũng khó nhận ra ngay. -->
+                <symbol id="fi-user" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="3.4"/>
+          <path d="M4.8 20.4c.9-3.7 3.6-5.6 7.2-5.6s6.3 1.9 7.2 5.6"/>
+        </symbol>
+                <symbol id="fi-gift" viewBox="0 0 24 24">
+          <rect x="3.2" y="9.6" width="17.6" height="11.2" rx="1.8"/>
+          <path d="M2.2 6.4h19.6v3.2H2.2z"/><path d="M12 6.4v14.4"/>
+          <path d="M12 6.4S11.2 2.6 8.6 2.6a2.4 2.4 0 0 0 0 4.8"/>
+          <path d="M12 6.4s.8-3.8 3.4-3.8a2.4 2.4 0 0 1 0 4.8"/>
+        </symbol>
+                <symbol id="fi-bookmark" viewBox="0 0 24 24">
+          <path d="M6.2 3.4h11.6a1 1 0 0 1 1 1v16.2l-6.8-4.4-6.8 4.4V4.4a1 1 0 0 1 1-1Z"/>
+        </symbol>
+                <symbol id="fi-home" viewBox="0 0 24 24">
+          <path d="M3.6 10.4 12 3.4l8.4 7v9.2a1 1 0 0 1-1 1H4.6a1 1 0 0 1-1-1v-9.2Z"/>
+          <path d="M9.6 20.6v-6.2h4.8v6.2"/>
+        </symbol>
+                <symbol id="fi-google" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.05H12v3.88h5.38a4.6 4.6 0 0 1-2 3.02v2.51h3.24c1.89-1.74 2.98-4.3 2.98-7.36Z"/>
+          <path fill="#34A853" d="M12 22c2.7 0 4.96-.9 6.62-2.41l-3.24-2.51c-.9.6-2.04.96-3.38.96-2.6 0-4.8-1.76-5.59-4.12H3.06v2.59A10 10 0 0 0 12 22Z"/>
+          <path fill="#FBBC05" d="M6.41 13.92a5.99 5.99 0 0 1 0-3.84V7.49H3.06a10 10 0 0 0 0 9.02l3.35-2.59Z"/>
+          <path fill="#EA4335" d="M12 5.96c1.47 0 2.79.51 3.83 1.5l2.87-2.87C16.95 2.99 14.7 2 12 2a10 10 0 0 0-8.94 5.49l3.35 2.59C7.2 7.72 9.4 5.96 12 5.96Z"/>
+        </symbol>
+                <symbol id="fi-fb-color" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="#1877F2"/>
+          <path fill="#fff" d="M13.6 19.5v-5.6h1.9l.36-2.2H13.6v-1.4c0-.64.18-1.07 1.1-1.07h1.17V7.26c-.2-.03-.9-.09-1.72-.09-1.7 0-2.87 1.04-2.87 2.95v1.65H9.37v2.2h1.91v5.6h2.32Z"/>
+        </symbol>
+                <symbol id="fi-apple" viewBox="0 0 24 24">
+          <path fill="#000" d="M16.7 12.66c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.81 3.15-.46 7.81 1.3 10.36.86 1.25 1.89 2.65 3.24 2.6 1.3-.05 1.79-.84 3.36-.84s2.01.84 3.39.81c1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.72-1.04-2.75-4.14ZM14.2 4.9c.71-.87 1.19-2.07 1.06-3.27-1.02.04-2.26.68-3 1.54-.66.77-1.24 2-1.08 3.17 1.14.09 2.3-.58 3.02-1.44Z"/>
+        </symbol>
+                <symbol id="fi-eye" viewBox="0 0 24 24">
+          <path d="M2.2 12S5.8 5.6 12 5.6 21.8 12 21.8 12 18.2 18.4 12 18.4 2.2 12 2.2 12Z"/>
+          <circle cx="12" cy="12" r="3.2"/>
+        </symbol>
+                <symbol id="fi-eye-off" viewBox="0 0 24 24">
+          <path d="M9.9 5.9A8.9 8.9 0 0 1 12 5.6c6.2 0 9.8 6.4 9.8 6.4a17.7 17.7 0 0 1-3.3 4.1"/>
+          <path d="M6.3 7.7A17.5 17.5 0 0 0 2.2 12S5.8 18.4 12 18.4c1.5 0 2.8-.37 3.9-.93"/>
+          <path d="M9.9 9.9a3.2 3.2 0 0 0 4.3 4.3"/>
+          <path d="m3.4 3.4 17.2 17.2"/>
+        </symbol>
+
+                <!-- ── mạng xã hội. Facebook và TikTok là glyph ĐẶC (một path,
+             fill), Instagram và YouTube là nét — đúng như hình mẫu, và
+             cũng là cách duy nhất giữ được lỗ tam giác của YouTube mà
+             không phải tô một tam giác trùng màu nền nút. ── -->
+                <symbol id="fi-facebook" viewBox="0 0 24 24">
+          <path d="M13.5 21.5v-8.6h2.9l.44-3.35h-3.34V7.4c0-.97.27-1.63 1.66-1.63h1.78V2.77c-.31-.04-1.37-.13-2.6-.13-2.57 0-4.33 1.57-4.33 4.45v2.46H7.1v3.35h2.91v8.6h3.49Z"/>
+        </symbol>
+                <symbol id="fi-instagram" viewBox="0 0 24 24">
+          <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/>
+          <circle cx="12" cy="12" r="4"/><circle cx="16.9" cy="7.1" r="1.15"/>
+        </symbol>
+                <symbol id="fi-tiktok" viewBox="0 0 24 24">
+          <path d="M16.9 2.4h-3.3v13.2a2.55 2.55 0 1 1-2.2-2.53v-3.32a5.85 5.85 0 1 0 5.5 5.85V9.16a6.7 6.7 0 0 0 3.9 1.25V7.1a3.6 3.6 0 0 1-3.9-3.5V2.4Z"/>
+        </symbol>
+                <symbol id="fi-youtube" viewBox="0 0 24 24">
+          <rect x="2.6" y="5.4" width="18.8" height="13.2" rx="4.2"/>
+          <path d="m10.3 9.2 5.2 2.8-5.2 2.8V9.2Z"/>
+        </symbol>
+
+                <!-- ══ MÀN HÌNH CHI TIẾT TOUR ══
+             Ba nhóm, cùng một khổ 24×24 và cùng nét như mọi icon phía trên:
+               · thao tác trên ảnh bìa và thanh mục lục (back/heart/share…),
+               · bốn ô thông tin nhanh (plane/hotel/calendar…),
+               · điểm nhấn hành trình — khoá `ic` trong TOURS[].highlights
+                 ghép thẳng thành #fi-<ic>, nên ĐỔI TÊN Ở ĐÂY LÀ GÃY DỮ LIỆU.
+                 Thiếu một khoá thì app.js rơi về #fi-star chứ không vỡ. -->
+                <symbol id="fi-back" viewBox="0 0 24 24">
+          <path d="M20 12H4.4"/><path d="m10.6 5.8-6.2 6.2 6.2 6.2"/>
+        </symbol>
+                <symbol id="fi-close" viewBox="0 0 24 24">
+          <path d="M6.4 6.4 17.6 17.6"/><path d="M17.6 6.4 6.4 17.6"/>
+        </symbol>
+                <symbol id="fi-chevron" viewBox="0 0 24 24">
+          <path d="m9.4 5.4 6.6 6.6-6.6 6.6"/>
+        </symbol>
+                <symbol id="fi-heart" viewBox="0 0 24 24">
+          <path d="M12 20.6C12 20.6 3.4 15.4 3.4 9.4a4.5 4.5 0 0 1 8.6-1.9 4.5 4.5 0 0 1 8.6 1.9c0 6-8.6 11.2-8.6 11.2Z"/>
+        </symbol>
+                <symbol id="fi-share" viewBox="0 0 24 24">
+          <path d="M12 15.2V3.4"/><path d="m7.6 7.8 4.4-4.4 4.4 4.4"/>
+          <path d="M5 13.4v5.4a1.8 1.8 0 0 0 1.8 1.8h10.4a1.8 1.8 0 0 0 1.8-1.8v-5.4"/>
+        </symbol>
+                <symbol id="fi-plane" viewBox="0 0 24 24">
+          <path d="M20.8 15.4 13.4 11V4.6a1.4 1.4 0 0 0-2.8 0V11L3.2 15.4v2.1l7.4-2.3v3.7L8.4 20.3v1.3l3.6-1 3.6 1v-1.3l-2.2-1.4v-3.7l7.4 2.3v-2.1Z"/>
+        </symbol>
+                <symbol id="fi-hotel" viewBox="0 0 24 24">
+          <rect x="4.4" y="3.4" width="15.2" height="17.2" rx="2"/>
+          <path d="M8.4 7.6h2.2M13.4 7.6h2.2M8.4 11.4h2.2M13.4 11.4h2.2"/>
+          <path d="M9.8 20.6v-4.4h4.4v4.4"/>
+        </symbol>
+                <symbol id="fi-calendar" viewBox="0 0 24 24">
+          <rect x="3.4" y="5.2" width="17.2" height="15.4" rx="2.4"/>
+          <path d="M8 3.2v4M16 3.2v4M3.4 10.2h17.2"/>
+        </symbol>
+                <symbol id="fi-bolt" viewBox="0 0 24 24">
+          <path d="M13.4 2.6 4.6 13.4h6.1l-.7 8 8.8-10.8h-6.1l.7-8Z"/>
+        </symbol>
+                <symbol id="fi-pin" viewBox="0 0 24 24">
+          <path d="M12 21.4s6.6-5.8 6.6-11.2a6.6 6.6 0 1 0-13.2 0c0 5.4 6.6 11.2 6.6 11.2Z"/>
+          <circle cx="12" cy="10" r="2.4"/>
+        </symbol>
+                <symbol id="fi-route" viewBox="0 0 24 24">
+          <circle cx="6" cy="5.6" r="2.4"/><circle cx="18" cy="18.4" r="2.4"/>
+          <path d="M8.4 5.6h6.2a3.4 3.4 0 0 1 0 6.8H9.4a3.4 3.4 0 0 0 0 6.8h6.2"/>
+        </symbol>
+                <symbol id="fi-checklist" viewBox="0 0 24 24">
+          <path d="M10.4 6.4h9.8M10.4 12h9.8M10.4 17.6h9.8"/>
+          <path d="m3.6 6.2 1.5 1.5 2.3-2.6"/><path d="m3.6 11.8 1.5 1.5 2.3-2.6"/>
+          <path d="m3.6 17.4 1.5 1.5 2.3-2.6"/>
+        </symbol>
+                <symbol id="fi-price" viewBox="0 0 24 24">
+          <path d="M11.4 3.4h9.2v9.2l-8.4 8.4a1.8 1.8 0 0 1-2.6 0l-6.6-6.6a1.8 1.8 0 0 1 0-2.6l8.4-8.4Z"/>
+          <circle cx="16.6" cy="7.4" r="1.3"/>
+        </symbol>
+                <symbol id="fi-cable" viewBox="0 0 24 24">
+          <path d="M2.6 5.6 21.4 9"/><path d="M12 7.4v3.4"/>
+          <rect x="7.2" y="10.8" width="9.6" height="7.4" rx="2"/>
+          <path d="M7.2 14.4h9.6"/>
+        </symbol>
+                <symbol id="fi-sunset" viewBox="0 0 24 24">
+          <path d="M2.6 19.8h18.8"/><path d="M5.8 16a6.2 6.2 0 0 1 12.4 0"/>
+          <path d="M12 3.2v3.2M4.6 6.4l2.2 2.2M19.4 6.4l-2.2 2.2"/>
+        </symbol>
+                <symbol id="fi-food" viewBox="0 0 24 24">
+          <path d="M6.2 3v7.8a2.6 2.6 0 0 0 5.2 0V3"/><path d="M8.8 13.4v7.4"/>
+          <path d="M17.6 3c-1.9 1.1-2.8 3-2.8 5.8 0 2 .9 3.2 2.8 3.6v8.4"/>
+        </symbol>
+                <symbol id="fi-boat" viewBox="0 0 24 24">
+          <path d="M3.4 16.8h17.2l-2.2 3.8H5.6l-2.2-3.8Z"/>
+          <path d="M6.8 16.8V8.2l9.6 3.4-1.5 5.2"/><path d="M6.8 8.2V4"/>
+        </symbol>
+                <symbol id="fi-dive" viewBox="0 0 24 24">
+          <path d="M21.2 12s-3.6 4.6-8.2 4.6S4.8 12 4.8 12s3.6-4.6 8.2-4.6S21.2 12 21.2 12Z"/>
+          <path d="M4.8 12 2.4 8.8v6.4L4.8 12Z"/><circle cx="16.6" cy="10.8" r=".9"/>
+        </symbol>
+                <symbol id="fi-camera" viewBox="0 0 24 24">
+          <rect x="2.8" y="6.8" width="18.4" height="13.4" rx="2.6"/>
+          <circle cx="12" cy="13.4" r="3.6"/><path d="M8.6 6.8 10 4h4l1.4 2.8"/>
+        </symbol>
+                <symbol id="fi-market" viewBox="0 0 24 24">
+          <path d="M4.2 9.4h15.6v10a1.4 1.4 0 0 1-1.4 1.4H5.6a1.4 1.4 0 0 1-1.4-1.4v-10Z"/>
+          <path d="M2.8 9.4 5.2 3.6h13.6l2.4 5.8"/><path d="M9 9.4V3.6M15 9.4V3.6"/>
+        </symbol>
+                <symbol id="fi-show" viewBox="0 0 24 24">
+          <path d="m11 2.8 1.9 4.5 4.5 1.9-4.5 1.9-1.9 4.5-1.9-4.5-4.5-1.9 4.5-1.9L11 2.8Z"/>
+          <path d="m18 15.2.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1Z"/>
+        </symbol>
+                <symbol id="fi-search" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="6.6"/><path d="m16 16 4.6 4.6"/>
+        </symbol>
+                <symbol id="fi-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h15.4"/><path d="m13.4 5.8 6.2 6.2-6.2 6.2"/>
+        </symbol>
+                <symbol id="fi-train" viewBox="0 0 24 24">
+          <rect x="5.4" y="3.4" width="13.2" height="13.2" rx="3"/>
+          <path d="M5.4 10.6h13.2"/><circle cx="9" cy="13.6" r="1"/><circle cx="15" cy="13.6" r="1"/>
+          <path d="m7.6 16.6-2.2 4M16.4 16.6l2.2 4"/>
+        </symbol>
+            </defs>
+        </svg>
+
+    <!-- ══════════════════════════ HEADER ══════════════════════════ -->
+    <header class="site-header" id="siteHeader">
+        <div class="wrap nav-inner">
+            <!-- Cùng một tấm logo với footer, chỉ khác cỡ. Ảnh đã có sẵn phần
+                 chữ nên không kèm <span> tên nữa; alt gánh luôn vai trò đó. -->
+            <a class="brand" href="#top">
+                <img src="images/travel-map/logo.png" alt="VivuTravel" width="174" height="58" />
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <div class="nav-item" data-mega="dest" hidden>
+                    <button class="nav-link" type="button" aria-expanded="false" aria-controls="megaDest" data-jump="#destinations">
+          Điểm đến <i class="caret" aria-hidden="true"></i>
+        </button>
+                </div>
+                <div class="nav-item" data-mega="theme">
+                    <button class="nav-link" type="button" aria-expanded="false" aria-controls="megaTheme" data-jump="#tours">
+          Tour theo chủ đề <i class="caret" aria-hidden="true"></i>
+        </button>
+                </div>
+                <a class="nav-link" href="#trai-nghiem">Trải nghiệm</a>
+                <a class="nav-link" href="#cam-nang">Cẩm nang</a>
+
+                <div class="drawer-extra">
+                    <div class="drawer-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+                        <input type="search" class="js-nav-search" placeholder="Tìm tour, điểm đến…" autocomplete="off" aria-label="Tìm tour" />
+                    </div>
+                    <button class="btn btn--ghost btn--block" data-login>Đăng nhập</button>
+                    <a class="btn btn--sun btn--block" href="#dang-ky">Đăng ký</a>
+                    <a class="drawer-phone" href="tel:1900888999">Hotline 1900 888 999</a>
+                </div>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="nav-search" id="navSearch">
+                    <input type="search" id="navSearchInput" class="js-nav-search" placeholder="Tìm tour, điểm đến…" autocomplete="off" aria-label="Tìm tour" tabindex="-1" />
+                    <button class="icon-btn" id="searchToggle" type="button" aria-label="Tìm kiếm" aria-expanded="false" title="Tìm kiếm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        </button>
+                    <div class="sug" id="navSug" hidden></div>
+                </div>
+
+                <button class="icon-btn" id="myBookingsBtn" title="Đặt chỗ của tôi" aria-label="Đặt chỗ của tôi">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8Z"/><path d="M14 6v12" stroke-dasharray="2 2.6"/></svg>
+        <span class="pill" id="bookingCount">0</span>
+      </button>
+
+                <button class="btn-text" id="loginBtn" data-login>Đăng nhập</button>
+                <!-- Đăng ký là <a> vì nó dẫn tới một TRANG có địa chỉ riêng
+                     (#dang-ky), khác với Đăng nhập vốn chỉ mở một khung nổi
+                     nên phải là <button>. Cặp này cố ý lệch nhau về dáng: một
+                     cái chữ trơn, một cái nút cam — hai nút đặc cạnh nhau thì
+                     người dùng phải đọc mới biết cái nào là việc chính. -->
+                <a class="btn btn--sun btn--sm nav-cta" id="signupBtn" href="#dang-ky">Đăng ký</a>
+
+                <button class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+            </div>
+        </div>
+
+        <div class="mega" id="megaDest" data-panel="dest" role="region" aria-label="Điểm đến" hidden>
+            <div class="wrap mega-inner" id="megaDestInner"></div>
+        </div>
+        <div class="mega" id="megaTheme" data-panel="theme" role="region" aria-label="Tour theo chủ đề">
+            <div class="wrap mega-inner mega-inner--theme" id="megaThemeInner"></div>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <!-- ═════════════ CẢNH 01 · CẤT CÁNH ═════════════ -->
+        <section class="shot shot--hero" data-cam="hero">
+            <div class="stage">
+                <!-- Ba lớp phẳng chồng lên nhau, thứ tự do z-index trong style.css.
+           Không còn không gian 3D: camera đã thôi đẩy theo trục Z. -->
+                <div class="world">
+                    <!-- bầu trời + điểm sáng trên đường chân trời, nằm dưới cùng -->
+                    <div class="layer layer--sky"></div>
+
+                    <!-- video nền + chuỗi ảnh tua theo cuộn.
+             <video> là đường lui: chạy khi chưa sinh chuỗi ảnh hoặc khi mở
+             trang bằng file:// (fetch manifest bị chặn). Có chuỗi ảnh thì
+             js/scroll-scrub.js vẽ lên <canvas> và cho <video> nghỉ. -->
+                    <div class="layer layer--plate">
+                        <!-- preload="metadata", không phải "auto": có chuỗi ảnh thì <video>
+               không bao giờ hiện, tải sẵn cả 65MB là phí băng thông. -->
+                        <video id="heroVideo" poster="frames/hero/frame-00001.webp" muted playsinline preload="none" disablepictureinpicture aria-label="Video mở đầu — hành trình bay">
+            <source src="video/hero 3.mp4" type="video/mp4" />
+          </video>
+                        <canvas id="heroSequence" class="hero-sequence" aria-hidden="true"></canvas>
+                    </div>
+
+                    <!-- tiêu đề: dâng lên và mờ dần khi cuộn, luôn nằm trên video -->
+                    <div class="layer layer--copy">
+                        <div class="wrap">
+                            <h1 class="display display--slogan">
+                                Mỗi điểm đến là một góc nhìn.<br />
+                                <span class="display-soft">Mỗi hành trình là một câu chuyện.</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-ui">
+                    <form class="search-card" id="searchForm" autocomplete="off">
+                        <div class="field">
+                            <label for="fDest">Điểm đến</label>
+                            <select id="fDest"><option value="">Bạn muốn đi đâu?</option></select>
+                        </div>
+                        <div class="field">
+                            <label for="fDate">Ngày khởi hành</label>
+                            <input type="date" id="fDate" />
+                        </div>
+                        <div class="field">
+                            <label for="fGuests">Số khách</label>
+                            <select id="fGuests">
+              <option value="1">1 khách</option>
+              <option value="2" selected>2 khách</option>
+              <option value="3">3 khách</option>
+              <option value="4">4 khách</option>
+              <option value="6">5 – 6 khách</option>
+              <option value="10">Trên 6 khách</option>
+            </select>
+                        </div>
+                        <button class="btn btn--sun search-go" type="submit">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+            Tìm tour
+          </button>
+                    </form>
+
+                    <div class="scroll-cue" aria-hidden="true">
+                        <span>Cuộn để khám phá</span>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ CẢNH 02 · HÀNH TRÌNH ═════════════
+       Khối tuyên ngôn và bản đồ bay 3D là MỘT cú máy ghim 720vh, không có mép
+       nối nào ở giữa. Bốn pha gối lên nhau:
+
+         0 → 34%   pha đọc  · nền trắng như một khối chữ bình thường, câu văn
+                              hiện dần theo cuộn; bản đồ mới là bóng mờ và máy
+                              bay đã lượn vào từ ngoài khung;
+         24 → 48%  pha mở   · chữ trôi lên và tan, nền trắng tan theo để lộ
+                              trời, bản đồ hiện rõ, camera hạ góc từ nhìn
+                              thẳng xuống thành nhìn chéo;
+         34 → 92%  pha bay  · Việt Nam → Thái Lan → Trung Quốc → Hàn Quốc →
+                              Nhật Bản, đường bay kéo dài dần phía sau;
+         92 → 100% pha thoát· máy bay ngóc lên rời khung, camera lùi nhẹ rồi
+                              nhả xuống lưới tour.
+
+       Các mốc gối lên nhau là có chủ ý: chữ chưa tan hẳn thì nền đã bắt đầu
+       đổi và bản đồ đã bắt đầu hiện. Xếp nối đuôi thì mỗi pha thành một cú
+       giật riêng, đúng cái cảm giác ngắt quãng mà cảnh này dựng ra để tránh.
+
+       Phần canvas do js/travel-map.js (Three.js) dựng, phần chữ do
+       js/statement-motion.js (GSAP) lo; cả hai cùng đọc tiến độ cuộn của
+       chính section này nên không cần đồng bộ thủ công. -->
+        <section class="shot shot--journey lazy-section" id="flightMap">
+            <div class="stage fm-stage">
+                <!-- Vẫn là chữ HTML thật — đọc được, dịch được, máy tìm kiếm thấy được;
+           chỉ khác là nó nổi trên canvas thay vì nằm ở một section riêng. -->
+                <div class="jr-copy">
+                    <div class="wrap wrap--mid">
+                        <p class="statement-text">
+                            <b>Một chuyến đi tốt</b> không phải là đi được nhiều nơi nhất, mà là
+                            <b>đứng đúng chỗ vào đúng khoảnh khắc</b> — khi ánh sáng, con nước và mùa trong năm gặp nhau.
+                        </p>
+                        <ul class="stat-row">
+                            <li><b>320+</b><span>hành trình</span></li>
+                            <li><b>48.000</b><span>lượt khách</span></li>
+                            <li><b>4.8/5</b><span>điểm hài lòng</span></li>
+                            <li><b>24/7</b><span>trực dọc tuyến</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ---------- Nội dung năm điểm đến ----------
+           Kho chữ cho tấm thẻ bật ra khi trỏ chuột vào một điểm đến trên bản
+           đồ (chấm hotspot, hoặc chính hòn đảo). js/travel-map.js đọc theo
+           data-stop rồi bê nguyên phần bên trong sang thẻ; bản thân khối này
+           không bao giờ hiện.
+
+           Để ở ĐÂY chứ không nhét vào travel-map.js, cùng lý do với khối chữ
+           bên trên: đây là chữ biên tập thật — đọc được, dịch được, máy tìm
+           kiếm thấy được. Trong JS thì nó chỉ là chuỗi ký tự.
+
+           data-stop phải TRÙNG TỪNG KÝ TỰ với `label` trong bộ STOPS của
+           travel-map.js, kể cả dấu. Lệch một chữ là bấm vào địa danh đó không
+           ra gì (im lặng, không lỗi) — sửa tên thì sửa cả hai chỗ. -->
+                <div class="fm-notes" hidden>
+                    <article data-stop="Việt Nam">
+                        <p>Ba nghìn hai trăm cây số bờ biển và một dải núi chạy suốt chiều dài đất nước — đi từ Bắc vào Nam là đi qua bốn mùa xếp cạnh nhau. Chúng tôi xếp lịch theo con nước và mùa lúa, không theo ngày nghỉ lễ.</p>
+                        <dl>
+                            <div><dt>Mùa đẹp</dt>
+                                <dd>Tháng 3 &amp; tháng 9</dd>
+                            </div>
+                            <div><dt>Thời lượng</dt>
+                                <dd>5–12 ngày</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article data-stop="Thái Lan">
+                        <p>Bangkok chỉ để bắt nhịp, rồi rời ngay xuống biển Andaman. Phần đáng nhớ của Thái Lan nằm ở khoảng lặng giữa hai chặng: một buổi sáng khất thực ở Chiang Mai, một chiều nước rút ở Krabi.</p>
+                        <dl>
+                            <div><dt>Mùa đẹp</dt>
+                                <dd>Tháng 11 → tháng 2</dd>
+                            </div>
+                            <div><dt>Thời lượng</dt>
+                                <dd>4–9 ngày</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article data-stop="Trung Quốc">
+                        <p>Tuyến dựng quanh ba thứ đổi theo mùa rõ nhất: sương ở Trương Gia Giới, tuyết ở Cửu Trại Câu và lá đỏ ở Tây An. Mỗi mùa là một hành trình khác hẳn, chứ không phải một hành trình đi vào lúc khác.</p>
+                        <dl>
+                            <div><dt>Mùa đẹp</dt>
+                                <dd>Tháng 4 &amp; tháng 10</dd>
+                            </div>
+                            <div><dt>Thời lượng</dt>
+                                <dd>7–14 ngày</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article data-stop="Hàn Quốc">
+                        <p>Seoul thì đi được quanh năm, nhưng Hàn Quốc thì không. Hai tuần cuối tháng 3 cho hoa anh đào ở Jinhae, hai tuần đầu tháng 11 cho lá phong ở Naejangsan — lệch một tuần là lệch cả chuyến.</p>
+                        <dl>
+                            <div><dt>Mùa đẹp</dt>
+                                <dd>Cuối tháng 3 · đầu tháng 11</dd>
+                            </div>
+                            <div><dt>Thời lượng</dt>
+                                <dd>5–8 ngày</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article data-stop="Nhật Bản">
+                        <p>Chặng cuối, và cũng là chặng chúng tôi giữ chậm nhất. Kyoto phải ba ngày mới bắt đầu mở ra, Hokkaido thì cần cả một mùa. Lịch trình vì thế chừa sẵn những buổi sáng không có gì trong đó.</p>
+                        <dl>
+                            <div><dt>Mùa đẹp</dt>
+                                <dd>Tháng 4 · tháng 11</dd>
+                            </div>
+                            <div><dt>Thời lượng</dt>
+                                <dd>6–12 ngày</dd>
+                            </div>
+                        </dl>
+                    </article>
+                </div>
+
+                <!-- Ảnh lui: hiện khi máy không chạy được WebGL hoặc người dùng bật giảm
+           chuyển động. Lúc đó cảnh trải phẳng thành chữ nằm trên, bản đồ tĩnh
+           nằm dưới. -->
+                <img class="fm-fallback" data-src="images/travel-map/cutout/01-ban-do-chau-a.webp" alt="Bản đồ hành trình châu Á" loading="lazy" decoding="async" width="1600" height="900" />
+            </div>
+
+            <!-- Lớp sương giao ca xuống lưới tour. Nằm ngoài .stage và neo ở ĐÁY
+         SECTION, nên suốt cú máy nó ở dưới tầm nhìn; chỉ trồi lên đúng lúc
+         khung hình thôi ghim và lưới tour đẩy lên. Rỗng ruột: toàn bộ là
+         gradient trong style.css, không có ảnh nào cả. -->
+            <div class="jr-mist" aria-hidden="true"></div>
+        </section>
+
+        <!-- ═════════════ CẢNH 03 · ĐIỂM ĐẾN NỔI BẬT ═════════════
+       Mỗi nấc cuộn đổi sang một điểm đến: ảnh nền chéo mờ, tiêu đề + mô tả
+       trượt lên. Số nấc trong CLIMB_STOPS (app.js) phải khớp số <li> ở đây.
+
+       TẠM ẨN: bỏ hidden + style bên dưới là cảnh chạy lại như cũ. Giữ nguyên
+       markup để không phải dựng lại; app.js không lỗi khi cảnh bị ẩn. -->
+        <section class="shot shot--climb lazy-section" id="experience" data-cam="climb" hidden style="display:none">
+            <div class="stage">
+                <div class="world">
+                    <div class="layer layer--skyhigh" data-depth="far"></div>
+
+                    <!-- Bản 1920×1080 dựng từ ảnh 4K gốc trong images/Junney/…-starter-pack.
+             Bản 4K giải nén ra 33MB bộ nhớ mỗi tấm, năm tấm xếp chồng vượt sức
+             GPU nên bị đẩy ra rồi nạp lại liên tục → giật.
+             decoding="async" để việc giải mã không chặn luồng chính. -->
+                    <div class="dest-stack" id="destStack" aria-hidden="true">
+                        <div class="dest-shot on"><img src="images/dest/destination-ha-long.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        <div class="dest-shot"><img src="images/dest/destination-japan.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        <div class="dest-shot"><img src="images/dest/destination-korea.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        <div class="dest-shot"><img src="images/dest/destination-thailand.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        <div class="dest-shot"><img src="images/dest/destination-europe.jpg" alt="" loading="lazy" decoding="async" /></div>
+                    </div>
+
+                    <div class="layer layer--skyfade"></div>
+                </div>
+
+                <div class="climb-ui wrap">
+                    <div class="dest-meter">
+                        <b><i id="destStep">01</i><span>/ 05</span></b>
+                        <i class="alt-bar" aria-hidden="true"><u></u></i>
+                    </div>
+                    <ul class="climb-caps" id="climbCaps">
+                        <li class="on">
+                            <h2>Vịnh Hạ Long</h2>
+                            <p>Hơn một nghìn sáu trăm đảo đá vôi mọc thẳng khỏi mặt nước. Đi thuyền ngủ đêm để kịp thấy sương tan lúc rạng sáng.</p>
+                        </li>
+                        <li>
+                            <h2>Nhật Bản</h2>
+                            <p>Kyoto mùa lá đỏ, Tokyo lúc nửa đêm, và những chuyến tàu đúng giờ tới từng giây nối hai nơi đó lại.</p>
+                        </li>
+                        <li>
+                            <h2>Hàn Quốc</h2>
+                            <p>Seoul sống về đêm, Jeju sống theo mùa. Một hành trình đủ cho cả phố xá lẫn bờ biển đá đen.</p>
+                        </li>
+                        <li>
+                            <h2>Thái Lan</h2>
+                            <p>Bangkok náo nhiệt rồi lặng đi khi xuống tới Krabi — vịnh nước xanh, vách đá dựng và những buổi chiều rất dài.</p>
+                        </li>
+                        <li>
+                            <h2>Châu Âu</h2>
+                            <p>Bốn nước trong mười hai ngày: quảng trường cổ, hồ dưới chân núi Alps và những chuyến tàu chạy xuyên biên giới.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ CẢNH 04 · DANH SÁCH TOUR ═════════════
+       Nơi chuyến bay nhả xuống: máy bay vừa rời khung ở cuối cảnh 02 thì lưới
+       tour trồi lên. -->
+
+        <section class="section lazy-section" id="tours">
+            <div class="wrap">
+                <header class="section-head" data-reveal>
+                    <div>
+                        <h2 class="title">Hoạt động nổi bật</h2>
+                    </div>
+                    <p class="section-note" id="resultCount">—</p>
+                </header>
+
+                <div class="filters" data-reveal>
+                    <div class="chips" id="regionChips" role="tablist">
+                        <button class="chip is-active" data-region="all">Tất cả</button>
+                        <button class="chip" data-region="bac">Miền Bắc</button>
+                        <button class="chip" data-region="trung">Miền Trung</button>
+                        <button class="chip" data-region="nam">Miền Nam</button>
+                        <button class="chip" data-region="quocte">Quốc tế</button>
+                    </div>
+                    <div class="filter-right">
+                        <label class="range-field">
+            <span>Ngân sách tối đa: <b id="priceLabel">—</b></span>
+            <input type="range" id="priceRange" min="2000000" max="40000000" step="500000" value="40000000" />
+          </label>
+                        <label class="select-field">
+            <span>Sắp xếp</span>
+            <select id="sortBy">
+              <option value="popular">Phổ biến nhất</option>
+              <option value="price-asc">Giá thấp → cao</option>
+              <option value="price-desc">Giá cao → thấp</option>
+              <option value="rating">Đánh giá cao nhất</option>
+              <option value="days">Số ngày nhiều nhất</option>
+            </select>
+          </label>
+                    </div>
+                </div>
+
+                <div class="tour-grid" id="tourGrid"></div>
+
+                <!-- Mỗi lần bấm hiện thêm 6 thẻ; app.js tự ẩn nút khi đã bày hết và tự
+           đưa số về 6 mỗi khi bộ lọc đổi. -->
+                <div class="more-row" id="moreRow" hidden>
+                    <button class="btn btn--ghost" id="moreTours" type="button"></button>
+                </div>
+
+                <div class="empty" id="emptyState" hidden>
+                    <h3>Chưa có tour nào khớp bộ lọc</h3>
+                    <p>Thử nới ngân sách hoặc chọn khu vực khác nhé.</p>
+                    <button class="btn btn--ghost" id="resetFilters">Xoá bộ lọc</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ GIAO CA · LƯỚI TOUR → ĐIỂM ĐẾN ═════════════
+       Một dải trời mỏng chen giữa hai khối: lưới tour kết bằng nền trắng, khối
+       điểm đến cũng nền trắng — hai mảng phẳng dán vào nhau thì thấy rõ chỗ
+       ghép. Dải này là một cánh đồng lụa: mấy nếp gấp mềm chồng lên nhau, mây
+       nằm sau nếp, một vệt bay thắt thành trái tim rồi vút lên chỗ máy bay.
+
+       ── Cách dựng khối cho lụa ────────────────────────────────────────────
+       Mỗi NẾP chỉ cần đúng ba thứ, lặp lại ba lần là ra cả cánh đồng:
+         1. mảng tô đổ từ sống nếp xuống, nhạt dần tới TRẮNG ĐẶC trước khi
+            chạm đáy khung;
+         2. một vệt tối mềm ôm ngay dưới sống — đây là thứ tách nếp này khỏi
+            nếp sau, thiếu nó thì ba mảng nhoè thành một;
+         3. một nét trắng mảnh trên sống, cộng vài sợi tơ chạy song song.
+       Mắt đọc sáng-tối-sáng liên tiếp thành mặt cong. Không có lớp nào là
+       "hiệu ứng 3D" cả, chỉ là ba lớp phẳng xếp đúng thứ tự.
+
+       ── Vì sao dùng <use> chứ không chép path ─────────────────────────────
+       Cả ba lớp của một nếp phải bám ĐÚNG một đường cong. Chép tay ra ba
+       bản là chắc chắn có ngày sửa lệch một bản rồi nếp hở thành hai nét
+       rời. Ở đây mỗi nếp có duy nhất một <path> trong <defs>, còn lại đều
+       là <use> trỏ vào nó — sửa một chỗ là cả nếp đi theo.
+
+       Path ấy là hình ĐÓNG (cong ở trên + ba cạnh ở dưới). Stroke nó thì về
+       lý là stroke cả bốn cạnh, nhưng ba cạnh kia nằm ở x=-40, x=1480,
+       y=430 — đều ngoài khung 1440×420 — nên thứ duy nhất còn thấy vẫn chỉ
+       là đường cong. Nhờ vậy một path dùng được cho cả tô, cả viền, cả vệt
+       tối, cả sợi tơ.
+
+       aria-hidden: thuần trang trí, không có chữ nào để đọc. -->
+        <div class="sky-bridge" data-reveal aria-hidden="true">
+            <svg class="bridge-art" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" focusable="false">
+                <defs>
+                    <!-- ── Ba sống nếp ─────────────────────────────────────
+               Xếp từ xa tới gần: A cao nhất và dựng đứng nhất ở quãng
+               phải, C thấp nhất và gần mắt nhất. Chúng KHÔNG song song —
+               khoảng cách giữa ba sống hẹp lại ở trái, doãng ra ở phải.
+               Đó là toàn bộ chiều sâu của cảnh: song song đều nhau thì
+               ra ba đường kẻ, doãng dần thì ra một mặt trải về xa.
+
+               Cả ba chạy từ x=-40 tới x=1480, thò ra ngoài khung 1440 ở
+               cả hai đầu — nếp lụa phải đi xuyên qua màn hình, thấy được
+               điểm bắt đầu hay điểm kết thúc là nó thành một vật thể đặt
+               giữa trang chứ không còn là mạch nối hai khối. -->
+                    <path id="brFoldA" d="M-40,318 C190,310 370,298 550,306 C710,313 810,344 910,342 C1040,339 1160,306 1270,274 C1355,249 1422,238 1480,232 L1480,430 L-40,430 Z" />
+                    <path id="brFoldB" d="M-40,346 C200,338 390,322 570,334 C730,344 830,376 940,376 C1070,376 1190,340 1300,308 C1378,285 1436,274 1480,268 L1480,430 L-40,430 Z" />
+                    <path id="brFoldC" d="M-40,378 C210,372 400,358 590,368 C750,376 850,400 960,398 C1090,395 1210,364 1320,336 C1392,317 1444,308 1480,304 L1480,430 L-40,430 Z" />
+
+                    <clipPath id="brClipA"><use href="#brFoldA" /></clipPath>
+                    <clipPath id="brClipB"><use href="#brFoldB" /></clipPath>
+                    <clipPath id="brClipC"><use href="#brFoldC" /></clipPath>
+
+                    <!-- Mỗi nếp một thang màu riêng, nếp càng gần mắt càng
+               nhạt — xa thì hơi nước làm đậm lại, gần thì loãng đi.
+               Cùng một màu cho cả ba là ba nếp dính thành một mảng.
+
+               Cả ba BẮT BUỘC kết bằng #ffffff và kết SỚM (offset .78–.85)
+               chứ không phải đúng ở mốc 1: path tô xuống tận y=430, quá
+               đáy khung 420, nên mốc 1 rơi ra ngoài tầm nhìn. Để stop
+               cuối là màu xanh thì hàng pixel cuối cùng còn thấy được
+               vẫn đang xanh rồi đứt phựt sang nền trắng của khối kế
+               tiếp — ra một đường kẻ ngang suốt bề ngang màn hình. -->
+                    <linearGradient id="brTintA" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#d9e6f3" />
+                        <stop offset=".42" stop-color="#eff5fb" />
+                        <stop offset=".78" stop-color="#ffffff" />
+                    </linearGradient>
+                    <linearGradient id="brTintB" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#e4edf7" />
+                        <stop offset=".45" stop-color="#f6fafd" />
+                        <stop offset=".8" stop-color="#ffffff" />
+                    </linearGradient>
+                    <linearGradient id="brTintC" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#edf3fa" />
+                        <stop offset=".5" stop-color="#fafcfe" />
+                        <stop offset=".85" stop-color="#ffffff" />
+                    </linearGradient>
+
+                    <!-- Vệt tối ôm dưới sống nếp = một nét STROKE rất dày đem
+               làm mờ. Làm bằng stroke chứ không bằng một path riêng vì
+               nét thì tự bám theo đường cong ở mọi điểm; một mảng tô
+               "dịch xuống 30" thì gradient của nó tính theo khung bao
+               của cả hình, chỗ dốc chỗ thoải sẽ dày mỏng khác nhau.
+
+               Nét dày nằm giữa sống nên nó loang cả LÊN TRÊN — mà trên
+               sống là bầu trời, tô tối vào đấy là hỏng. Vì thế mỗi vệt
+               bị kẹp trong clipPath của chính nếp đó: chỉ còn nửa dưới.
+
+               Khung lọc phải nới rộng hẳn (mặc định chỉ +10% mỗi phía):
+               stdDeviation lớn mà khung chật thì vệt mờ bị cắt vuông ở
+               rìa, hiện ra thành một vệt xám có cạnh thẳng. -->
+                    <filter id="brSoften" x="-6%" y="-45%" width="112%" height="190%">
+                        <feGaussianBlur stdDeviation="10" />
+                    </filter>
+                </defs>
+
+                <!-- Ba cụm mây nằm TRONG khung vẽ, không phải thẻ HTML đặt chồng
+             lên: khung vẽ bị phóng to rồi cắt bớt theo khổ màn
+             (preserveAspectRatio slice), nên chỉ khi mây cùng nằm trong đó
+             thì nó mới dính chặt vào sống nếp ở mọi khổ. Đặt bằng % của thẻ
+             ngoài thì màn càng rộng mây càng tụt xuống dưới nếp và mất hút.
+
+             Toạ độ âm và cỡ 680–820 cho một đám mây rộng chừng 300: mỗi tấm
+             PNG là một đám mây nằm lệch trong khung vuông trong suốt của nó,
+             phải kéo cả khung đi mới đặt được đám mây vào đúng chỗ.
+
+             Vẽ TRƯỚC ba nếp, nên chân mây bị nếp che — mây đứng sau đường
+             chân trời chứ không dán đè lên nó. Cụm giữa là cụm phải lật
+             ngang (scale -1) để không lộ ra là cùng một tấm với cụm phải. -->
+                <image class="br-cloud br-cloud--l" data-lazy-href="images/cloud-3.png" x="-32" y="-213" width="812" height="812" />
+                <g transform="translate(1242,0) scale(-1,1)">
+                    <image class="br-cloud br-cloud--m" data-lazy-href="images/cloud-7.png" x="0" y="-59" width="682" height="682" />
+                </g>
+                <!-- Cụm phải dừng ở x≈1340 chứ không chạy ra sát mép: quãng đó
+             nếp A đã dựng lên tới y≈236, đặt mây ra mép nữa là nếp che gần
+             hết, còn lại một mẩu trắng vô nghĩa ở góc. -->
+                <image class="br-cloud br-cloud--r" data-lazy-href="images/cloud-7.png" x="522" y="-166" width="818" height="818" />
+
+                <!-- ══ NẾP A · xa nhất ══ -->
+                <use href="#brFoldA" fill="url(#brTintA)" />
+                <g clip-path="url(#brClipA)">
+                    <use href="#brFoldA" fill="none" stroke="#8ba9ca" stroke-opacity=".40" stroke-width="34" filter="url(#brSoften)" />
+                    <!-- Sợi tơ: cùng đường cong, dịch xuống vài đơn vị. Đây là
+               thứ nói cho mắt biết mặt nếp là VẢI chứ không phải một
+               mảng màu — nhưng chỉ đúng khi chúng chạy song song với
+               sống, tơ mà cắt ngang sống là ra vân gỗ. -->
+                    <use href="#brFoldA" fill="none" stroke="#ffffff" stroke-opacity=".40" stroke-width="1" transform="translate(0,13)" />
+                    <use href="#brFoldA" fill="none" stroke="#ffffff" stroke-opacity=".26" stroke-width="1" transform="translate(0,25)" />
+                </g>
+                <use href="#brFoldA" fill="none" stroke="#ffffff" stroke-opacity=".92" stroke-width="1.7" />
+
+                <!-- ══ NẾP B · giữa, rộng nhất ══ -->
+                <use href="#brFoldB" fill="url(#brTintB)" />
+                <g clip-path="url(#brClipB)">
+                    <use href="#brFoldB" fill="none" stroke="#8ba9ca" stroke-opacity=".34" stroke-width="30" filter="url(#brSoften)" />
+                    <use href="#brFoldB" fill="none" stroke="#ffffff" stroke-opacity=".38" stroke-width="1" transform="translate(0,12)" />
+                    <use href="#brFoldB" fill="none" stroke="#ffffff" stroke-opacity=".24" stroke-width="1" transform="translate(0,22)" />
+                </g>
+                <use href="#brFoldB" fill="none" stroke="#ffffff" stroke-opacity=".95" stroke-width="1.8" />
+
+                <!-- ══ NẾP C · gần mắt nhất ══
+             Nhạt nhất và vệt tối mỏng nhất: nó nằm trong 40% dưới của khối,
+             tức là đã bị lớp tan dần (.sky-bridge::after) phủ trắng một phần.
+             Đánh đậm bằng hai nếp kia thì lớp phủ ăn mất một nửa, còn lại là
+             một vệt xám lem không ra hình gì. -->
+                <use href="#brFoldC" fill="url(#brTintC)" />
+                <g clip-path="url(#brClipC)">
+                    <use href="#brFoldC" fill="none" stroke="#8ba9ca" stroke-opacity=".22" stroke-width="24" filter="url(#brSoften)" />
+                    <use href="#brFoldC" fill="none" stroke="#ffffff" stroke-opacity=".30" stroke-width="1" transform="translate(0,11)" />
+                </g>
+                <use href="#brFoldC" fill="none" stroke="#ffffff" stroke-opacity=".9" stroke-width="1.6" />
+
+                <!-- Vệt bay: một nét liền duy nhất — đuôi thả xuống dưới trái,
+             thắt thành trái tim, rồi vút lên chỗ máy bay. Nét đứt do
+             stroke-dasharray, và chính dasharray đó chạy chậm về phía máy
+             bay (xem @keyframes brDash) nên vệt như đang được kéo dài ra.
+
+             Trái tim đặt ngay TRÊN sống nếp B, đuôi thả xuống dưới sống:
+             một nét vắt qua đường chân trời buộc mắt phải đọc hai bên nét
+             là hai độ sâu khác nhau — rẻ hơn mọi cách tạo chiều sâu khác. -->
+                <g class="br-flight">
+                    <path class="br-trail" fill="none" stroke-linecap="round"
+                          d="M232,362 C268,350 292,340 306,328 C276,300 276,266 296,266 C308,266 315,274 315,284 C315,274 322,266 334,266 C354,266 356,296 322,326 C392,346 512,352 632,334 C748,316 830,286 900,244" />
+
+                    <!-- Ba lớp lồng nhau: lớp ngoài ghim toạ độ (thuộc tính
+                 transform), lớp giữa dành cho CSS bay vào, lớp trong xoay
+                 và phóng hình. Gộp lại một lớp thì transform trong CSS đè
+                 mất toạ độ và máy bay rơi về gốc khung.
+
+                 rotate(64) vì đoạn cuối vệt bay đi lên chếch 26° so với
+                 phương ngang, mà hình máy bay vẽ ở tư thế mũi chúc thẳng
+                 lên: 90 − 26 = 64. Sửa đuôi vệt bay thì phải tính lại số
+                 này, không thì máy bay bay ngang qua vệt của chính nó. -->
+                    <g transform="translate(900,244)">
+                        <g class="br-plane">
+                            <g transform="rotate(64) scale(1.5) translate(-12,-12)">
+                                <!-- Thân + cánh xuôi + cánh đuôi, vẽ ở tư thế nhìn
+                     từ trên xuống. Hai chấm là động cơ treo dưới cánh —
+                     bỏ chúng thì hình về lại một mũi tên, có chúng mắt
+                     mới đọc ra là máy bay chở khách. -->
+                                <path d="M12,1.2 C13.3,1.2 14.1,3.3 14.3,6.3 L14.5,9.7 L22.5,15.5 C22.9,15.8 22.8,16.5 22.3,16.3 L14.6,13.8 L14.8,18.3 L17.3,20.7 C17.6,21 17.5,21.6 17,21.4 L12,19.7 L7,21.4 C6.5,21.6 6.4,21 6.7,20.7 L9.2,18.3 L9.4,13.8 L1.7,16.3 C1.2,16.5 1.1,15.8 1.5,15.5 L9.5,9.7 L9.7,6.3 C9.9,3.3 10.7,1.2 12,1.2 Z" />
+                                <ellipse cx="7.4" cy="13.6" rx="1.05" ry="1.7" />
+                                <ellipse cx="16.6" cy="13.6" rx="1.05" ry="1.7" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- ═════════════ CẢNH 05 · MÁY QUAY LIA NGANG ═════════════ -->
+        <section class="shot shot--pan lazy-section" id="destinations" data-cam="pan">
+            <div class="stage">
+                <div class="pan-head wrap">
+                    <h2 class="title">Điểm đến của mùa này</h2>
+                </div>
+                <div class="pan-rail">
+                    <div class="pan-track" id="destGrid"></div>
+                </div>
+                <div class="pan-progress" aria-hidden="true"><i></i></div>
+            </div>
+        </section>
+
+        <!-- ═════════════ CẢNH 06 · HOÀNG HÔN & ƯU ĐÃI ═════════════ -->
+        <section class="shot shot--sunset lazy-section" data-cam="sunset">
+            <div class="stage">
+                <div class="world">
+                    <div class="layer layer--sunset" data-depth="mid">
+                        <img data-src="images/sunset-dunes.jpg" alt="Hoàng hôn trên sa mạc" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="layer layer--cloud cloud--e" data-depth="near"><img data-src="images/cloud-8.png" alt="" loading="lazy" decoding="async" /></div>
+                    <div class="layer layer--sunfade"></div>
+                </div>
+                <div class="sunset-ui wrap">
+                    <h2 class="title title--lg">Giảm thêm 10%<br />cho nhóm từ 4 khách</h2>
+                    <p class="lede">Nhập mã <code>VIVU10</code> ở bước thanh toán. Áp dụng cho mọi tour khởi hành trước 30/09/2026.</p>
+                    <div class="countdown" id="countdown">
+                        <div><b>--</b><span>ngày</span></div>
+                        <div><b>--</b><span>giờ</span></div>
+                        <div><b>--</b><span>phút</span></div>
+                        <div><b>--</b><span>giây</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ═════════════ CẢNH 07 · CAM KẾT ═════════════
+       Năm cam kết xếp thành danh sách gạch ngang. Rê chuột vào dòng nào thì
+       dòng đó bung ra: số thứ tự nhường chỗ cho ảnh, và hai đoạn nội dung
+       trượt xuống dưới tiêu đề. Lúc nào cũng có đúng MỘT dòng đang mở.
+
+       Toàn bộ chữ và ảnh là HTML thật, js/app.js chỉ gắn/gỡ class .is-open và
+       đặt max-height (cùng cách với accordion Cẩm nang bên dưới). Tắt JS thì
+       dòng đầu vẫn mở sẵn — chính HTML gắn .is-open cho nó.
+
+       Nút mũi tên là chỗ bám cho bàn phím và cảm ứng: rê chuột thì không có
+       trên hai thứ đó, thiếu nút này là cả khối thành chữ chết. -->
+        <section class="section lazy-section" id="why">
+            <div class="wrap">
+                <header class="section-head" data-reveal>
+                    <div>
+                        <h2 class="title">Vì sao khách quay lại</h2>
+                    </div>
+                </header>
+
+                <ol class="why-list" data-reveal>
+                    <li class="why-item is-open">
+                        <div class="why-media">
+                            <span class="why-no" aria-hidden="true">/01</span>
+                            <div class="why-shot"><img data-src="images/t-phu-quoc.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        </div>
+                        <div class="why-main">
+                            <h3 class="why-title">Giá trọn gói, không phụ phí</h3>
+                            <div class="why-more">
+                                <p>Vé máy bay, khách sạn, bữa ăn, vé tham quan và bảo hiểm nằm trong một con số duy nhất, hiện ra ngay lúc bạn chọn ngày khởi hành.</p>
+                                <p>Không phụ phí cuối tuần, không phụ phí nhiên liệu, không mục nào “tự túc” phát sinh dọc đường. Con số lúc đặt là con số lúc trả.</p>
+                            </div>
+                        </div>
+                        <button class="why-mark" type="button" aria-expanded="true">
+            <span class="sr-only">Giá trọn gói, không phụ phí</span>
+          </button>
+                    </li>
+
+                    <li class="why-item">
+                        <div class="why-media">
+                            <span class="why-no" aria-hidden="true">/02</span>
+                            <div class="why-shot"><img data-src="images/t-coast.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        </div>
+                        <div class="why-main">
+                            <h3 class="why-title">Xác nhận chỗ trong 5 phút</h3>
+                            <div class="why-more">
+                                <p>Hệ thống giữ chỗ ngay khi đặt, không phải chờ nhân viên gọi lại xác nhận vào giờ hành chính hôm sau.</p>
+                                <p>Mã đặt tour, lịch trình chi tiết theo từng ngày và danh sách đồ cần mang được gửi qua email trong vòng năm phút.</p>
+                            </div>
+                        </div>
+                        <button class="why-mark" type="button" aria-expanded="false">
+            <span class="sr-only">Xác nhận chỗ trong 5 phút</span>
+          </button>
+                    </li>
+
+                    <li class="why-item">
+                        <div class="why-media">
+                            <span class="why-no" aria-hidden="true">/03</span>
+                            <div class="why-shot"><img data-src="images/t-sapa.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        </div>
+                        <div class="why-main">
+                            <h3 class="why-title">Huỷ linh hoạt</h3>
+                            <div class="why-more">
+                                <p>Hoàn 100% nếu huỷ trước ngày khởi hành 15 ngày, hoàn 50% nếu trước 7 ngày. Không hỏi lý do.</p>
+                                <p>Đổi ngày khởi hành miễn phí một lần cho mọi tour, kể cả tour đang trong đợt khuyến mãi.</p>
+                            </div>
+                        </div>
+                        <button class="why-mark" type="button" aria-expanded="false">
+            <span class="sr-only">Huỷ linh hoạt</span>
+          </button>
+                    </li>
+
+                    <li class="why-item">
+                        <div class="why-media">
+                            <span class="why-no" aria-hidden="true">/04</span>
+                            <div class="why-shot"><img data-src="images/t-highland.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        </div>
+                        <div class="why-main">
+                            <h3 class="why-title">Điều hành theo sát tuyến</h3>
+                            <div class="why-more">
+                                <p>Mỗi đoàn có một điều hành viên riêng trực 24/7 suốt hành trình, không phải tổng đài chung.</p>
+                                <p>Thời tiết xấu, chuyến bay đổi giờ, có người cần hỗ trợ y tế — phương án thay thế chuẩn bị từ trước chứ không xoay khi đã xảy ra.</p>
+                            </div>
+                        </div>
+                        <button class="why-mark" type="button" aria-expanded="false">
+            <span class="sr-only">Điều hành theo sát tuyến</span>
+          </button>
+                    </li>
+
+                    <li class="why-item">
+                        <div class="why-media">
+                            <span class="why-no" aria-hidden="true">/05</span>
+                            <div class="why-shot"><img data-src="images/t-lagoon.jpg" alt="" loading="lazy" decoding="async" /></div>
+                        </div>
+                        <div class="why-main">
+                            <h3 class="why-title">Đoàn tối đa 16 khách</h3>
+                            <div class="why-more">
+                                <p>Không ghép đoàn lớn. Mười sáu là ngưỡng để cả đoàn còn vừa một chiếc xe nhỏ, một nhà hàng địa phương và một chuyến tàu.</p>
+                                <p>Đủ nhỏ để đổi lịch ngay trong ngày khi gặp thời tiết đẹp bất ngờ, và đủ để hướng dẫn viên nhớ tên từng người.</p>
+                            </div>
+                        </div>
+                        <button class="why-mark" type="button" aria-expanded="false">
+            <span class="sr-only">Đoàn tối đa 16 khách</span>
+          </button>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ═════════════ CẢNH 08 · CẢM NHẬN ═════════════
+       Một cú máy ghim: câu tuyên ngôn khổ lớn đứng yên ở nền, còn thẻ cảm nhận
+       lần lượt bay vào giữa khung — trái, phải, trái, phải — mỗi nấc cuộn một
+       thẻ. js/says-motion.js gắn class .is-live rồi mới bật bố cục xếp chồng;
+       không có GSAP (CDN hỏng, giảm chuyển động) thì class không bao giờ được
+       gắn và cả khối rơi về lưới thẻ tĩnh đọc bình thường. -->
+        <section class="shot shot--says lazy-section" id="reviews">
+            <div class="stage">
+                <!-- Trời và mấy tầng mây trôi. Bốn tấm cloud-*.png rời nhau, mỗi
+             tấm một tốc độ và một hướng, nên không bao giờ thấy chúng đi
+             thành hàng. Chuyển động thuần CSS: không cuộn cũng trôi, và
+             không tốn thêm một dòng JS nào. -->
+                <div class="says-sky" aria-hidden="true">
+                    <span class="says-cloud says-cloud--a"></span>
+                    <span class="says-cloud says-cloud--b"></span>
+                    <span class="says-cloud says-cloud--c"></span>
+                    <!-- Hai tấm này trước ở đầu khối tour rồi bị gỡ; dựng lại ở
+             đây, vẫn đúng cặp góc trên-trái / trên-phải như cũ. -->
+                    <span class="says-cloud says-cloud--d"></span>
+                    <span class="says-cloud says-cloud--e"></span>
+                </div>
+                <div class="says-head wrap">
+                    <!-- Ba dòng, ngắt tay: đây là mảng chữ NỀN, thẻ cảm nhận đứng chắn
+             ngay giữa nó, nên khối chữ phải cao hơn tấm thẻ thì mới còn thấy
+             đầu và chân câu ở trên dưới. Để chữ tự xuống dòng thì mỗi khổ màn
+             một kiểu ngắt, có khổ ra đúng hai dòng và thẻ che kín. -->
+                    <h2 class="says-title">Khách của Vivu<br /><span>kể mãi<br />không hết!</span></h2>
+                </div>
+                <div class="says-deck" id="reviewGrid"></div>
+            </div>
+        </section>
+
+        <!-- ═════════════ CẢNH 09 · CẨM NANG ═════════════
+       Hai cột: cột trái đứng yên giới thiệu và mời liên hệ, cột phải là danh
+       sách câu hỏi. Chia đôi như vậy vì hai việc khác nhau — cột trái đọc một
+       lần rồi thôi, cột phải đóng mở liên tục. Xếp dọc thành một cột thì mỗi
+       lần mở một câu là tiêu đề trôi mất, người đọc không còn mốc nào.
+
+       Cột trái KHÔNG sticky: danh sách chỉ có 6 câu, cao hơn cột trái đúng
+       một quãng ngắn, ghim lại chỉ tổ thấy nó giật một nhịp rồi đứng im. -->
+        <section class="section faq-scene lazy-section" id="faq">
+            <!-- Lớp trang trí: vệt bay ở trên, hoa gió và mây ở góc dưới trái —
+           đều nằm sau nội dung và pointer-events:none. Đặt trong MỘT thẻ để
+           chỉ cần một dòng CSS là tắt được cả cụm ở khổ hẹp, nơi chúng chỉ
+           tổ chen chỗ. -->
+            <div class="faq-deco" aria-hidden="true">
+                <svg class="faq-trail" viewBox="0 0 460 300" fill="none" focusable="false">
+                    <path d="M18,286 C40,250 44,214 24,196 C10,183 -2,196 8,210 C16,221 34,220 52,206 C96,172 120,120 190,86 C246,59 320,44 404,34"
+                          stroke="currentColor" stroke-width="1.6" stroke-dasharray="7 7" stroke-linecap="round" />
+                    <g transform="translate(404,34) rotate(52) scale(1.35) translate(-12,-12)">
+                        <path fill="currentColor"
+                              d="M12,1.2 C13.3,1.2 14.1,3.3 14.3,6.3 L14.5,9.7 L22.5,15.5 C22.9,15.8 22.8,16.5 22.3,16.3 L14.6,13.8 L14.8,18.3 L17.3,20.7 C17.6,21 17.5,21.6 17,21.4 L12,19.7 L7,21.4 C6.5,21.6 6.4,21 6.7,20.7 L9.2,18.3 L9.4,13.8 L1.7,16.3 C1.2,16.5 1.1,15.8 1.5,15.5 L9.5,9.7 L9.7,6.3 C9.9,3.3 10.7,1.2 12,1.2 Z" />
+                    </g>
+                </svg>
+
+                <!-- Hoa gió. Vẽ tay chứ không dùng ảnh: nó phải nhạt tới mức gần
+             như không thấy, mà ảnh nén ở độ nhạt đó là lộ hết vệt bệt. -->
+                <svg class="faq-compass" viewBox="0 0 200 200" fill="none" focusable="false">
+                    <circle cx="100" cy="100" r="94" stroke="currentColor" stroke-width="1" />
+                    <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width=".7" />
+                    <circle cx="100" cy="100" r="30" stroke="currentColor" stroke-width=".7" />
+                    <!-- Bốn cánh phụ vẽ TRƯỚC và mảnh hơn: bốn cánh chính đè lên
+               trên mới ra thứ bậc, vẽ sau là chúng cắt ngang cánh chính. -->
+                    <g transform="rotate(45 100 100)" stroke="currentColor" stroke-width=".7">
+                        <path d="M100,40 L106,94 100,100 94,94 Z M100,160 L106,106 100,100 94,106 Z" />
+                        <path d="M40,100 L94,94 100,100 94,106 Z M160,100 L106,94 100,100 106,106 Z" />
+                    </g>
+                    <g stroke="currentColor" stroke-width="1">
+                        <path d="M100,16 L109,91 100,100 91,91 Z M100,184 L109,109 100,100 91,109 Z" />
+                        <path d="M16,100 L91,91 100,100 91,109 Z M184,100 L109,91 100,100 109,109 Z" />
+                    </g>
+                    <g fill="currentColor" font-size="13" font-weight="500" text-anchor="middle">
+                        <text x="100" y="12">N</text>
+                        <text x="100" y="198">S</text>
+                        <text x="6" y="105">W</text>
+                        <text x="194" y="105">E</text>
+                    </g>
+                </svg>
+
+                <img class="faq-cloud" data-src="images/cloud-5.png" alt="" loading="lazy" decoding="async" />
+            </div>
+
+            <div class="wrap faq-wrap">
+                <div class="faq-intro" data-reveal>
+                    <h2 class="faq-title">Cẩm nang</h2>
+                    <p class="faq-lede">Giải đáp nhanh những câu hỏi thường gặp trước khi đặt tour cùng Vivu.</p>
+                </div>
+
+                <div class="faq-list" id="faqList" data-reveal></div>
+            </div>
+        </section>
+
+        <!-- ═════════════ TRANG CHỦ ĐỀ · route #chu-de/<slug> ═════════════
+       Không phải file HTML riêng: vẫn nằm trong index.html nhưng khi
+       body.route-theme bật thì toàn bộ landing ở trên bị ẩn và chỉ còn khối
+       này. Nhờ vậy dùng lại được thẻ tour, bộ lọc và cả luồng đặt tour (modal
+       nằm sẵn cuối trang), mà URL vẫn chia sẻ được và nút back vẫn đúng. -->
+        <!-- ═════════════ TRANG TRẢI NGHIỆM · route #trai-nghiem ═════════════
+       Cùng cơ chế với trang chủ đề / điểm đến (ba dòng CSS bật tắt, xem
+       .route-exp trong style.css) nhưng KHÔNG dùng chung khung với chúng:
+       hai trang kia liệt kê tour — có ngày khởi hành, có luồng đặt ba bước.
+       Trải nghiệm là hoạt động lẻ trong ngày, thẻ khác, bộ lọc khác, và
+       không có gì để đặt tại chỗ. Nhồi chung một khung thì mỗi phần đều phải
+       mọc thêm nhánh "nếu là trải nghiệm thì…". -->
+        <section class="guide-page lazy-section" id="guidePage" aria-labelledby="guideTitle">
+            <div class="guide-hero">
+                <img class="guide-banner-bg" src="images/banner cẩm nang.png" alt="Hành trình khám phá Việt Nam từ núi non, biển đảo đến phố cổ" loading="lazy" decoding="async" />
+                <div class="guide-orb guide-orb--a" aria-hidden="true"></div>
+                <div class="guide-orb guide-orb--b" aria-hidden="true"></div>
+                <div class="wrap guide-hero-in">
+                    <a class="guide-back" href="#">← Về trang chủ</a>
+                    <h1 id="guideTitle">Cẩm nang</h1>
+                    <form class="guide-search" id="guideSearch" role="search">
+                        <svg class="fi" aria-hidden="true"><use href="#fi-search"/></svg>
+                        <input id="guideQ" type="search" placeholder="Bạn đang chuẩn bị đi đâu?" autocomplete="off" />
+                        <button class="btn btn--sun" type="submit">Tìm bài viết</button>
+                    </form>
+                </div>
+                <div class="guide-hero-cards" aria-hidden="true">
+                    <img src="images/t-japan.jpg" alt="" loading="lazy" decoding="async" />
+                    <img src="images/t-ha-long.jpg" alt="" loading="lazy" decoding="async" />
+                    <img src="images/t-sapa.jpg" alt="" loading="lazy" decoding="async" />
+                </div>
+            </div>
+
+            <div class="wrap guide-main">
+                <section class="guide-topics guide-motion" aria-labelledby="guideTopicsTitle">
+                    <div class="guide-mini-head">
+                        <h2 id="guideTopicsTitle">Khám phá theo chủ đề</h2><button class="guide-jump" id="guideJump" type="button">Xem tất cả →</button></div>
+                    <div class="guide-topic-grid">
+                        <a href="#chu-de/di-san-van-hoa" class="guide-topic"><img src="images/Activity/activity-05-cultural-cycling.webp" alt="Trải nghiệm văn hoá" loading="lazy" decoding="async" width="1200" height="676"><span><b>Văn hoá &amp; Di sản</b><small>Tìm hiểu lớp ký ức và câu chuyện bản địa</small></span></a>
+                        <a href="#chu-de/am-thuc-song-nuoc" class="guide-topic"><img src="images/Ẩm thực/ChatGPT Image 17_21_50 18 thg 8, 2026 (2).png" alt="Ẩm thực Việt Nam" loading="lazy" decoding="async"><span><b>Ẩm thực</b><small>Từ món ăn địa phương đến bàn tiệc vùng miền</small></span></a>
+                        <a href="#chu-de/nui-trekking" class="guide-topic"><img src="images/Activity/activity-01-mountain-trekking.webp" alt="Trekking miền núi" loading="lazy" decoding="async" width="1200" height="676"><span><b>Kinh nghiệm du lịch</b><small>Mẹo hay để chuyến đi luôn nhẹ nhàng</small></span></a>
+                        <a href="#trai-nghiem" class="guide-topic"><img src="images/Activity/activity-03-tropical-snorkeling.webp" alt="Trải nghiệm biển" loading="lazy" decoding="async" width="1200" height="676"><span><b>Trải nghiệm địa phương</b><small>Sống như người bản địa trong một ngày</small></span></a>
+                    </div>
+                </section>
+
+                <section class="guide-feature" aria-labelledby="guideFeatureTitle">
+                    <div class="guide-feature-media"><img src="images/t-heritage.jpg" alt="Phố cổ bên sông" loading="lazy" decoding="async" /></div>
+                    <div class="guide-feature-copy">
+                        <span class="guide-label">Bài viết nổi bật</span>
+                        <p class="guide-meta">Văn hoá · 8 phút đọc</p>
+                        <h2 id="guideFeatureTitle">Đi chậm giữa những miền di sản Việt Nam</h2>
+                        <p>Từ mái ngói rêu phong đến phiên chợ bên sông, một hành trình đẹp bắt đầu khi ta dành thời gian lắng nghe nơi mình đến.</p>
+                        <a class="guide-read" href="#chu-de/di-san-van-hoa">Khám phá hành trình <span>→</span></a>
+                    </div>
+                </section>
+
+                <section class="guide-library" aria-labelledby="guideLibraryTitle">
+                    <div class="guide-section-head">
+                        <div>
+                            <p class="kicker">Chọn điều bạn quan tâm</p>
+                            <h2 id="guideLibraryTitle">Khám phá cẩm nang</h2>
+                        </div>
+                        <p id="guideCount">—</p>
+                    </div>
+                    <div class="chips guide-chips" id="guideKinds" role="tablist"></div>
+                    <div class="guide-grid" id="guideGrid"></div>
+                    <div class="guide-empty" id="guideEmpty" hidden>
+                        <h3>Chưa tìm thấy bài phù hợp</h3>
+                        <p>Thử một từ khoá hoặc chủ đề khác nhé.</p>
+                    </div>
+                </section>
+
+                <section class="guide-tools guide-motion" aria-labelledby="guideToolsTitle">
+                    <div class="guide-mini-head">
+                        <div>
+                            <p class="kicker">Chuẩn bị thật nhẹ</p>
+                            <h2 id="guideToolsTitle">Cẩm nang quốc tế</h2>
+                        </div>
+                    </div>
+                    <div class="guide-tool-grid">
+                        <a href="#chu-de/bay-thang-quoc-te"><span>▣</span><b>Thủ tục chuyến đi</b><small>Visa, hộ chiếu và giấy tờ cần thiết</small><em>Xem chi tiết →</em></a>
+                        <a href="#chu-de/bay-thang-quoc-te"><span>↔</span><b>Tiền tệ &amp; thanh toán</b><small>Đổi tiền và thanh toán an toàn</small><em>Xem chi tiết →</em></a>
+                        <a href="#chu-de/bay-thang-quoc-te"><span>▧</span><b>Chuẩn bị hành lý</b><small>Checklist gọn nhẹ cho mọi chuyến bay</small><em>Xem chi tiết →</em></a>
+                        <a href="#chu-de/bay-thang-quoc-te"><span>☂</span><b>Thời tiết &amp; mùa đi</b><small>Chọn đúng thời điểm cho từng điểm đến</small><em>Xem chi tiết →</em></a>
+                    </div>
+                </section>
+
+                <section class="guide-panorama guide-motion">
+                    <img src="images/t-heritage.jpg" alt="Đại Nội Huế trong hoàng hôn" loading="lazy" decoding="async">
+                    <div>
+                        <p>Trải nghiệm đặc biệt</p>
+                        <h2>Đại Nội Huế<br>trên không gian 3D</h2><span>Hành trình qua các lớp kiến trúc, lịch sử và ánh sáng cố đô.</span><a class="btn btn--sun" href="#chu-de/di-san-van-hoa">Bắt đầu trải nghiệm 3D</a></div>
+                </section>
+
+            </div>
+        </section>
+
+        <section class="exp-page lazy-section" id="expPage" aria-labelledby="expTitle">
+            <div class="exp-head">
+                <div class="exp-scene" aria-hidden="true">
+                    <img class="exp-hero-bg" src="images/Hero trải nghiệm.png" alt="" loading="lazy" decoding="async" />
+                </div>
+                <div class="wrap exp-head-copy">
+                    <a class="theme-back" href="#" id="expBack">← Về trang chủ</a>
+                    <h1 class="title" id="expTitle">Trải nghiệm</h1>
+                    <div class="exp-hero-search">
+                        <svg class="fi" aria-hidden="true"><use href="#fi-search" /></svg>
+                        <input id="expHeroQ" type="search" placeholder="Bạn muốn khám phá trải nghiệm nào?" autocomplete="off" aria-label="Tìm trải nghiệm" />
+                        <button class="btn btn--sun exp-discover" id="expDiscover" type="button">Khám phá ngay <span>→</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrap exp-body">
+                <div class="filters exp-hero-filters">
+                    <div class="chips" id="expKinds" role="tablist"></div>
+                    <p class="section-note" id="expCount">—</p>
+                </div>
+                <header class="exp-featured-head">
+                    <i aria-hidden="true"></i>
+                    <h2>Trải nghiệm nổi bật</h2><i aria-hidden="true"></i>
+                </header>
+                <div class="exp-grid" id="expGrid"></div>
+            </div>
+        </section>
+
+        <article class="hue-story" id="hueStory" aria-labelledby="hueStoryTitle">
+            <header class="hue-story-hero">
+                <img class="hue-story-bg" src="images/Khám phá huế/BG.png" alt="Phong cảnh xứ Huế lúc hoàng hôn" loading="lazy" decoding="async" />
+                <img class="hue-story-gate" src="images/Khám phá huế/Đại nội Huế.png" alt="Kiến trúc Đại Nội Huế" loading="lazy" decoding="async" />
+                <img class="hue-story-wing hue-story-wing--left" src="images/Khám phá huế/ChatGPT Image 14_11_20 20 thg 8, 2026 (3).png" alt="" loading="lazy" decoding="async" />
+                <img class="hue-story-wing hue-story-wing--right" src="images/Đại nội Huế/ChatGPT Image 14_11_20 20 thg 8, 2026 (4).png" alt="" loading="lazy" decoding="async" />
+                <img class="hue-story-cloud hue-story-cloud--one" src="images/Khám phá huế/ChatGPT Image 14_11_19 20 thg 8, 2026 (1).png" alt="" loading="lazy" decoding="async" />
+                <img class="hue-story-cloud hue-story-cloud--two" src="images/Khám phá huế/ChatGPT Image 14_11_19 20 thg 8, 2026 (2).png" alt="" loading="lazy" decoding="async" />
+                <div class="hue-extra-clouds" aria-hidden="true">
+                    <img src="images/cloud-1.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-2.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-3.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-4.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-5.png" alt="" loading="lazy" decoding="async" />
+                </div>
+                <div class="wrap hue-story-copy">
+                    <a class="theme-back" href="#trai-nghiem">← Trở lại Trải nghiệm</a>
+                    <p class="kicker">Di sản kiến trúc triều Nguyễn</p>
+                    <h1 id="hueStoryTitle">Khám phá<br />Đại Nội Huế</h1>
+                    <p>Một hành trình tương tác qua những công trình tiêu biểu trong Hoàng thành.</p>
+                    <button class="hue-scroll-cue" id="hueStartReading" type="button">Bắt đầu đọc <b>↓</b></button>
+                </div>
+            </header>
+
+            <div class="hue-article-shell wrap">
+                <header class="hue-article-lead">
+                    <p class="kicker">Vivu Editorial · 8 phút đọc</p>
+                    <h2>Một hành trình đi qua những lớp ký ức của Hoàng thành</h2>
+                    <p>Không chỉ là một quần thể kiến trúc, Đại Nội Huế còn lưu giữ cách một triều đại tổ chức không gian sống, nghi lễ và quyền lực. Bài viết này dẫn bạn đi chậm qua từng công trình tiêu biểu, từ Ngọ Môn đến những cung điện sâu bên trong
+                        Tử Cấm Thành.</p>
+                </header>
+
+                <div class="hue-article-layout">
+                    <aside class="hue-article-aside" aria-label="Mục lục bài viết">
+                        <p>Trong bài viết</p>
+                        <nav id="hueArticleToc"></nav>
+                    </aside>
+                    <div class="hue-article-content">
+                        <blockquote>“Kiến trúc Huế không phô bày tất cả trong một ánh nhìn. Mỗi lớp cổng mở ra một nhịp đi chậm hơn, yên hơn.”</blockquote>
+                        <div class="hue-article-sections" id="hueBuildingGrid" aria-label="Các công trình trong Đại Nội Huế"></div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <section class="theme-page lazy-section" id="themePage" aria-labelledby="themeTitle">
+            <div class="theme-cover">
+                <!-- Mây trang trí. Là <img> chứ không phải background của .theme-cover:
+                     mây nằm giữa một tấm PNG vuông 1100px và chỉ chiếm ~42% bề ngang
+                     tấm ấy, nên với background-size mọi con số đều phải nhân nhẩm lên
+                     hơn hai lần, mà tấm lại cao hơn khung bìa nên background-position
+                     theo % chạy NGƯỢC (số càng lớn mây càng lên cao). Ở dạng <img> thì
+                     left/top + translate(-50%,-50%) đặt đúng TÂM MÂY vào đúng chỗ mình
+                     ghi, muốn dời thì sửa thẳng con số.
+                     aria-hidden + alt rỗng: thuần trang trí, trình đọc màn hình bỏ qua. -->
+                <div class="theme-clouds" aria-hidden="true">
+                    <img src="images/cloud-3.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-5.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-1.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-2.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-4.png" alt="" loading="lazy" decoding="async" />
+                    <img src="images/cloud-7.png" alt="" loading="lazy" decoding="async" />
+                </div>
+
+                <!-- Mẫu 3D của banner: để RỖNG, renderThemeProps() trong app.js đổ vào
+                     mỗi lần vào trang. Bộ ảnh và vị trí khai trong THEME_SKINS ở đó,
+                     tra theo slug chủ đề — mỗi chủ đề một concept riêng, chủ đề chưa
+                     có concept thì rơi về bộ du lịch chung. -->
+                <div class="theme-props" aria-hidden="true"></div>
+                <img id="themeCover" src="" alt="" loading="lazy" decoding="async" />
+                <div class="theme-cover-in wrap">
+                    <!-- Không có nút "Về trang chủ" ở đây (trang Trải nghiệm thì vẫn
+                         còn, xem #expBack). Lối về nhà là logo trên header: nó trỏ
+                         #top, không khớp route nào nên applyRoute() gọi
+                         exitRoutePage() và trả về trang chủ. -->
+                    <h1 class="title" id="themeTitle">—</h1>
+                    <p class="lede" id="themeCount">—</p>
+
+                    <!-- Tìm TRONG trang này, không phải tìm toàn site: ô tìm kiếm
+                         trên header đã lo việc kia. Ở đây gõ vào là lọc ngay
+                         danh sách bên dưới theo tên/địa danh/thẻ, giữ nguyên chủ
+                         đề đang xem. Là <form> để phím Enter chạy sẵn, khỏi phải
+                         nghe keydown. -->
+                    <form class="theme-search" id="themeSearch" role="search">
+                        <svg class="fi" aria-hidden="true"><use href="#fi-search" /></svg>
+                        <input type="search" id="themeQ" autocomplete="off" placeholder="Bạn muốn tìm tour nào trong chủ đề này?" aria-label="Tìm tour trong chủ đề" />
+                        <button class="btn theme-search-go" type="submit" aria-label="Tìm tour ngay">
+                            <span class="go-label">Tìm tour ngay</span>
+                            <svg class="fi" aria-hidden="true"><use href="#fi-arrow" /></svg>
+                        </button>
+                    </form>
+
+                    <!-- Dải chuyển nhanh sang chủ đề khác. Nằm TRONG bìa chứ không
+                         dưới thân trang: nó là lối đi giữa các chủ đề, cùng nhóm
+                         với tiêu đề và ô tìm kiếm, chứ không phải một bộ lọc của
+                         danh sách như hàng chip khu vực bên dưới. -->
+                    <nav class="chips theme-rail" id="themeRail" aria-label="Chuyển chủ đề khác"></nav>
+                </div>
+            </div>
+
+            <div class="wrap theme-body">
+                <div class="filters">
+                    <div class="chips" id="themeRegionChips" role="tablist">
+                        <button class="chip is-active" data-region="all">Tất cả</button>
+                        <button class="chip" data-region="bac">Miền Bắc</button>
+                        <button class="chip" data-region="trung">Miền Trung</button>
+                        <button class="chip" data-region="nam">Miền Nam</button>
+                        <button class="chip" data-region="quocte">Quốc tế</button>
+                    </div>
+                    <div class="filter-right">
+                        <label class="range-field">
+            <span>Ngân sách tối đa: <b id="themePriceLabel">—</b></span>
+            <input type="range" id="themePrice" min="2000000" max="40000000" step="500000" value="40000000" />
+          </label>
+                        <label class="select-field">
+            <span>Sắp xếp</span>
+            <select id="themeSort">
+              <option value="popular">Phổ biến nhất</option>
+              <option value="price-asc">Giá thấp → cao</option>
+              <option value="price-desc">Giá cao → thấp</option>
+              <option value="rating">Đánh giá cao nhất</option>
+              <option value="days">Số ngày nhiều nhất</option>
+            </select>
+          </label>
+                    </div>
+                </div>
+
+                <div class="tour-grid" id="themeGrid"></div>
+                <div class="empty" id="themeEmpty" hidden>
+                    <h3>Chủ đề này chưa có tour khớp bộ lọc</h3>
+                    <p>Thử nới ngân sách hoặc bỏ chọn khu vực nhé.</p>
+                    <button class="btn btn--ghost" id="themeReset">Xoá bộ lọc</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═════════════ TRANG ĐĂNG KÝ (route #dang-ky) ═════════════
+             Trang thật chứ không phải khung nổi: có địa chỉ riêng để gửi cho
+             nhau, nút back của trình duyệt hoạt động, và biểu mẫu dài mười
+             dòng không phải nhét vào một ô cuộn trong khung.
+
+             KHÔNG có header và footer — chúng bị ẩn bằng hai dòng trong
+             style.css. Đây là màn hình một-việc: mọi đường dẫn khác trên
+             thanh điều hướng đều là lối kéo người ta rời khỏi việc đang làm
+             dở. Đổi lại phải tự chở lấy hai thứ header vốn lo: logo (góc trên
+             cột trái) và đường về trang chủ.
+
+             Dùng đúng ba dòng công tắc như trang chủ đề và trang trải nghiệm
+             (xem .auth-page trong style.css) — không có cơ chế định tuyến nào
+             riêng cho nó. -->
+        <section class="auth-page lazy-section" id="signupPage" aria-labelledby="suTitle">
+
+            <!-- ── cột trái: ảnh + lời mời ── -->
+            <div class="auth-hero">
+                <a class="auth-logo" href="#top" data-auth-home>
+                    <img src="images/travel-map/logo.png" alt="VivuTravel — về trang chủ" width="190" height="63" loading="lazy" decoding="async" />
+                </a>
+
+                <div class="auth-hero-in">
+                    <h2 class="auth-hero-title">Bắt đầu hành trình<br /><em>khám phá thế giới</em></h2>
+                    <p class="auth-hero-lede">Đăng ký tài khoản để nhận ưu đãi riêng, lưu trữ lịch trình và trải nghiệm tiện ích từ VivuTravel.</p>
+
+                    <ul class="auth-perks">
+                        <li>
+                            <span class="auth-perk-ico auth-perk-ico--sun"><svg class="fi" aria-hidden="true"><use href="#fi-gift"/></svg></span>
+                            <span><b>Ưu đãi dành riêng cho thành viên</b><small>Nhận khuyến mãi và mã giảm giá hấp dẫn</small></span>
+                        </li>
+                        <li>
+                            <span class="auth-perk-ico"><svg class="fi" aria-hidden="true"><use href="#fi-bookmark"/></svg></span>
+                            <span><b>Lưu hành trình dễ dàng</b><small>Quản lý và theo dõi các chuyến đi của bạn</small></span>
+                        </li>
+                        <li>
+                            <span class="auth-perk-ico"><svg class="fi" aria-hidden="true"><use href="#fi-headset"/></svg></span>
+                            <span><b>Hỗ trợ nhanh chóng</b><small>Đội ngũ chăm sóc khách hàng 24/7</small></span>
+                        </li>
+                    </ul>
+
+                    <p class="auth-secure">
+                        <svg class="fi" aria-hidden="true"><use href="#fi-shieldcheck"/></svg>
+                        <span>Thông tin của bạn được bảo mật tuyệt đối</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- ── cột phải: biểu mẫu ── -->
+            <div class="auth-side">
+                <div class="auth-card">
+                    <h2 class="auth-title" id="suTitle">Đăng ký</h2>
+
+                    <form id="signupForm" class="auth-form" novalidate>
+                        <label class="fld">
+                        <span>Họ và tên <i class="req" aria-hidden="true">*</i></span>
+                        <div class="in-wrap">
+                            <svg class="fi in-ico" aria-hidden="true"><use href="#fi-user"/></svg>
+                            <input type="text" id="suName" placeholder="Nhập họ và tên của bạn" autocomplete="name" required />
+                        </div>
+                    </label>
+
+                        <label class="fld">
+                        <span>Email <i class="req" aria-hidden="true">*</i></span>
+                        <div class="in-wrap">
+                            <svg class="fi in-ico" aria-hidden="true"><use href="#fi-mail"/></svg>
+                            <input type="email" id="suEmail" placeholder="Nhập email của bạn" autocomplete="email" required />
+                        </div>
+                    </label>
+
+                        <label class="fld">
+                        <span>Số điện thoại <i class="req" aria-hidden="true">*</i></span>
+                        <div class="in-wrap">
+                            <svg class="fi in-ico" aria-hidden="true"><use href="#fi-phone"/></svg>
+                            <input type="tel" id="suPhone" placeholder="Nhập số điện thoại" autocomplete="tel" required />
+                        </div>
+                    </label>
+
+                        <!-- Ô mật khẩu đeo icon ở CẢ HAI đầu, nên .in-wrap--pw chừa
+                         thêm padding bên phải; thả nút con mắt lên trên mà không
+                         chừa thì mật khẩu dài chạy thẳng vào dưới nút. -->
+                        <div class="fld">
+                            <span>Mật khẩu <i class="req" aria-hidden="true">*</i></span>
+                            <div class="in-wrap in-wrap--pw">
+                                <svg class="fi in-ico" aria-hidden="true"><use href="#fi-lock"/></svg>
+                                <input type="password" id="suPass" placeholder="Tạo mật khẩu" autocomplete="new-password" required />
+                                <button type="button" class="pw-eye" data-pw-toggle="suPass" aria-label="Hiện mật khẩu" aria-pressed="false">
+                                <svg class="fi" aria-hidden="true"><use href="#fi-eye"/></svg>
+                            </button>
+                            </div>
+                            <!-- Câu này là LỜI HỨA với người dùng, nên phần kiểm tra
+                             lúc gửi phải đòi đúng ba thứ nó kể (chữ, số, ký tự
+                             đặc biệt) chứ không riêng độ dài — xem PW_RULES
+                             trong app.js. -->
+                            <p class="fld-hint">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ, số và ký tự đặc biệt.</p>
+                        </div>
+
+                        <div class="fld">
+                            <span>Xác nhận mật khẩu <i class="req" aria-hidden="true">*</i></span>
+                            <div class="in-wrap in-wrap--pw">
+                                <svg class="fi in-ico" aria-hidden="true"><use href="#fi-lock"/></svg>
+                                <input type="password" id="suPass2" placeholder="Nhập lại mật khẩu" autocomplete="new-password" required />
+                                <button type="button" class="pw-eye" data-pw-toggle="suPass2" aria-label="Hiện mật khẩu" aria-pressed="false">
+                                <svg class="fi" aria-hidden="true"><use href="#fi-eye"/></svg>
+                            </button>
+                            </div>
+                        </div>
+
+                        <label class="check">
+                        <input type="checkbox" id="suAgree" />
+                        <span>Tôi đồng ý với <a href="#faq" class="link-quiet">Điều khoản sử dụng</a> và <a href="#faq" class="link-quiet">Chính sách bảo mật</a></span>
+                    </label>
+
+                        <button class="auth-submit" type="submit">Đăng ký tài khoản</button>
+                    </form>
+
+                    <p class="auth-or"><span>Hoặc đăng ký với</span></p>
+
+                    <!-- Ba nút này chưa nối nhà cung cấp nào; data-oauth chở tên để
+                     lời nhắc gọi đúng tên, và để sau này thay bằng lệnh gọi
+                     thật thì chỉ phải sửa một chỗ trong app.js. -->
+                    <div class="auth-social">
+                        <button type="button" data-oauth="Google">
+                        <svg class="auth-brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#fi-google"/></svg>Google
+                    </button>
+                        <button type="button" data-oauth="Facebook">
+                        <svg class="auth-brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#fi-fb-color"/></svg>Facebook
+                    </button>
+                        <button type="button" data-oauth="Apple">
+                        <svg class="auth-brand" viewBox="0 0 24 24" aria-hidden="true"><use href="#fi-apple"/></svg>Apple
+                    </button>
+                    </div>
+
+                    <p class="auth-swap">Đã có tài khoản? <button type="button" class="link-quiet" data-login>Đăng nhập</button></p>
+
+                    <!-- <a> chứ không <button>: nó dẫn về trang chủ nên phải mở
+                         được tab mới, chép được địa chỉ. data-auth-home chỉ để
+                         app.js chặn cú nhảy neo và trả hash về rỗng. -->
+                    <a class="auth-home" href="#top" data-auth-home>
+                        <svg class="fi" aria-hidden="true"><use href="#fi-home"/></svg>Quay về trang chủ
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ══════════════════════════ FOOTER ══════════════════════════
+         Năm cột: khối thương hiệu, ba cột liên kết, khối đăng ký bản tin.
+         Dưới cùng là một thanh riêng, nền đậm hơn một bậc, chở bản quyền +
+         liên kết pháp lý + mạng xã hội.
+
+         Icon lấy từ sprite <symbol> dùng chung đặt ở đầu <body> — trước đây
+         nó nằm ngay trong footer này, phải dời ra khi trang đăng ký cần ẩn
+         footer đi mà vẫn dùng icon. -->
+    <footer class="site-foot">
+        <div class="foot-main">
+            <div class="wrap foot-grid">
+                <!-- ── cột 1: thương hiệu ── -->
+                <div class="foot-brand">
+                    <!-- Logo là một tấm ảnh CHỨA SẴN CẢ chữ, nên không còn
+                         <span> tên thương hiệu đi kèm — để cả hai là tên hiện
+                         hai lần. Vì vậy alt phải là chính tên đó, không phải
+                         chuỗi rỗng: đây là chỗ duy nhất trình đọc màn hình
+                         nghe được tên trang ở footer.
+
+                         width/height ghi thẳng trên thẻ theo đúng tỉ lệ ảnh
+                         gốc để trình duyệt chừa sẵn chỗ, khỏi giật layout lúc
+                         ảnh tải xong. Ảnh có sẵn một vành trong suốt quanh
+                         hình, nên phần nhìn thấy hẹp hơn con số này một chút. -->
+                    <a class="foot-logo" href="#top">
+                        <img src="images/travel-map/logo.png" alt="VivuTravel" width="200" height="67" loading="lazy" decoding="async" />
+                    </a>
+
+                    <p class="foot-lede">Khám phá thế giới theo cách của riêng bạn. Những hành trình được tuyển chọn cho từng trải nghiệm đáng nhớ.</p>
+
+                    <ul class="foot-promises">
+                        <li>
+                            <span class="foot-chip"><svg class="fi" aria-hidden="true"><use href="#fi-globe"/></svg></span>
+                            <span><b>Hành trình tuyển chọn</b><small>Trải nghiệm độc đáo, chất lượng</small></span>
+                        </li>
+                        <li>
+                            <span class="foot-chip"><svg class="fi" aria-hidden="true"><use href="#fi-shield"/></svg></span>
+                            <span><b>Đặt tour an tâm</b><small>Thanh toán bảo mật, linh hoạt</small></span>
+                        </li>
+                        <li>
+                            <span class="foot-chip"><svg class="fi" aria-hidden="true"><use href="#fi-headset"/></svg></span>
+                            <span><b>Hỗ trợ tận tâm</b><small>Đồng hành 24/7 trong suốt chuyến đi</small></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ── cột 2: khám phá ── -->
+                <nav class="foot-col" aria-label="Khám phá">
+                    <h4>Khám phá</h4>
+                    <div class="foot-links">
+                        <a href="#tours"><svg class="fi" aria-hidden="true"><use href="#fi-play"/></svg>Tour du lịch</a>
+                        <a href="#trai-nghiem"><svg class="fi" aria-hidden="true"><use href="#fi-compass"/></svg>Trải nghiệm</a>
+                        <a href="#destinations"><svg class="fi" aria-hidden="true"><use href="#fi-pinuser"/></svg>Điểm đến</a>
+                        <a href="#cam-nang"><svg class="fi" aria-hidden="true"><use href="#fi-guide"/></svg>Cẩm nang du lịch</a>
+                    </div>
+                </nav>
+
+                <!-- ── cột 3: hành trình. Địa chỉ dạng #diem-den/… và #chu-de/…
+                     là đường dẫn THẬT của bộ định tuyến hash trong app.js, không
+                     phải neo trong trang — bấm vào là mở đúng trang điểm đến /
+                     chủ đề đó. ── -->
+                <nav class="foot-col" aria-label="Hành trình">
+                    <h4>Hành trình</h4>
+                    <div class="foot-links">
+                        <a href="#tours"><svg class="fi" aria-hidden="true"><use href="#fi-star"/></svg>Hành trình nổi bật</a>
+                        <a href="#diem-den/tokyo-kyoto-osaka"><svg class="fi" aria-hidden="true"><use href="#fi-blossom"/></svg>Nhật Bản</a>
+                        <a href="#diem-den/seoul-gyeonggi"><svg class="fi" aria-hidden="true"><use href="#fi-gate"/></svg>Hàn Quốc</a>
+                        <a href="#diem-den/bangkok-pattaya"><svg class="fi" aria-hidden="true"><use href="#fi-temple"/></svg>Thái Lan</a>
+                        <a href="#chu-de/bay-thang-quoc-te"><svg class="fi" aria-hidden="true"><use href="#fi-castle"/></svg>Châu Âu</a>
+                        <a href="#chu-de/bien-dao"><svg class="fi" aria-hidden="true"><use href="#fi-island"/></svg>Biển đảo</a>
+                        <a href="#chu-de/nui-trekking"><svg class="fi" aria-hidden="true"><use href="#fi-mountain"/></svg>Thiên nhiên &amp; Phiêu lưu</a>
+                    </div>
+                </nav>
+
+                <!-- ── cột 4: hỗ trợ ── -->
+                <nav class="foot-col" aria-label="Hỗ trợ">
+                    <h4>Hỗ trợ</h4>
+                    <div class="foot-links">
+                        <a href="#faq"><svg class="fi" aria-hidden="true"><use href="#fi-book"/></svg>Hướng dẫn đặt tour</a>
+                        <a href="#faq"><svg class="fi" aria-hidden="true"><use href="#fi-card"/></svg>Chính sách thanh toán</a>
+                        <a href="#faq"><svg class="fi" aria-hidden="true"><use href="#fi-shieldcheck"/></svg>Chính sách hủy tour</a>
+                        <a href="tel:1900888999"><svg class="fi" aria-hidden="true"><use href="#fi-phone"/></svg>Liên hệ VivuTravel</a>
+                        <a href="#faq"><svg class="fi" aria-hidden="true"><use href="#fi-help"/></svg>Câu hỏi thường gặp</a>
+                    </div>
+                </nav>
+
+                <!-- ── cột 5: bản tin ── -->
+                <div class="foot-sub">
+                    <h4>Nhận cảm hứng du lịch</h4>
+                    <p>Hành trình mới, điểm đến đẹp và ưu đãi được gửi đến bạn.</p>
+                    <form class="sub-form" id="subForm">
+                        <label class="sub-field">
+              <input type="email" placeholder="Email của bạn" aria-label="Email của bạn" required />
+              <svg class="fi" aria-hidden="true"><use href="#fi-mail"/></svg>
+            </label>
+                        <button class="sub-go" type="submit">
+              <svg class="fi" aria-hidden="true"><use href="#fi-send"/></svg>Đăng ký
+            </button>
+                    </form>
+                    <p class="sub-note">
+                        <svg class="fi" aria-hidden="true"><use href="#fi-lock"/></svg>
+                        <span>Chúng tôi cam kết bảo mật thông tin của bạn.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot-bar">
+            <div class="wrap foot-bar-inner">
+                <p class="foot-copy">© 2026 VivuTravel. All rights reserved.</p>
+                <nav class="foot-legal" aria-label="Pháp lý">
+                    <a href="#faq">Điều khoản sử dụng</a>
+                    <a href="#faq">Chính sách bảo mật</a>
+                    <a href="#top">Sitemap</a>
+                </nav>
+                <div class="foot-social">
+                    <span>Kết nối với chúng tôi</span>
+                    <a href="#top" aria-label="Facebook"><svg class="fi fi--solid" aria-hidden="true"><use href="#fi-facebook"/></svg></a>
+                    <a href="#top" aria-label="Instagram"><svg class="fi" aria-hidden="true"><use href="#fi-instagram"/></svg></a>
+                    <a href="#top" aria-label="TikTok"><svg class="fi fi--solid" aria-hidden="true"><use href="#fi-tiktok"/></svg></a>
+                    <a href="#top" aria-label="YouTube"><svg class="fi" aria-hidden="true"><use href="#fi-youtube"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ══════════════════════════ MODAL: CHI TIẾT TOUR ══════════════════════════ -->
+    <div class="modal" id="tourModal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <!-- KHÔNG có .modal-x ở đây như các khung khác: nút đóng của màn hình
+             này nằm trong dải thao tác đè lên ảnh bìa (.detail-bar) cùng với
+             "Quay lại", "Yêu thích" và "Chia sẻ" — app.js dựng dải đó. -->
+        <div class="modal-panel modal-panel--wide" role="dialog" aria-modal="true" aria-labelledby="tourModalTitle">
+            <div class="modal-scroll detail-scroll" id="tourModalBody"></div>
+            <!-- Thanh giá + nút đặt là ANH EM của vùng cuộn, không nằm trong
+                 nó. Trước đây nó ở trong với position:sticky;bottom:0 và luôn
+                 hụt 2,4rem so với đáy: sticky bị kẹp trong containing block,
+                 mà containing block là CONTENT box của .modal-scroll — kết
+                 thúc sớm hơn mép dưới vùng cuộn đúng bằng padding-bottom.
+                 Dải hụt ấy vẫn cuộn được nên chữ trôi qua và lòi ra bên dưới
+                 thanh giá. Ở ngoài thì .modal-panel (flex column) tự ghim nó
+                 dưới đáy, không còn gì để kẹp. -->
+            <div class="detail-cta" id="tourModalCta"></div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════ MODAL: ĐẶT TOUR ══════════════════════════ -->
+    <div class="modal" id="bookingModal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+            <button class="modal-x" data-close aria-label="Đóng">×</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title" id="bkTitle">Đặt tour</h2>
+                <p class="modal-sub" id="bkTourName">—</p>
+
+                <ol class="stepper" id="stepper">
+                    <li class="is-active"><b>1</b> Hành trình</li>
+                    <li><b>2</b> Liên hệ</li>
+                    <li><b>3</b> Xác nhận</li>
+                </ol>
+
+                <form id="bookingForm" novalidate>
+                    <section class="step" data-step="1">
+                        <div class="grid-2">
+                            <label class="fld"><span>Ngày khởi hành <i class="req" aria-hidden="true">*</i></span><select id="bDate" required></select></label>
+                            <label class="fld"><span>Điểm đón</span>
+              <select id="bPickup">
+                <option>Hà Nội</option><option>TP. Hồ Chí Minh</option><option>Đà Nẵng</option>
+                <option>Tự túc đến điểm tập trung</option>
+              </select>
+            </label>
+                        </div>
+
+                        <div class="counters">
+                            <div class="counter">
+                                <div><b>Người lớn</b><small>từ 12 tuổi — 100% giá tour</small></div>
+                                <div class="counter-ctrl">
+                                    <button type="button" data-step-btn="adults" data-delta="-1">−</button>
+                                    <output id="cAdults">2</output>
+                                    <button type="button" data-step-btn="adults" data-delta="1">+</button>
+                                </div>
+                            </div>
+                            <div class="counter">
+                                <div><b>Trẻ em</b><small>2 – 11 tuổi — 75% giá tour</small></div>
+                                <div class="counter-ctrl">
+                                    <button type="button" data-step-btn="children" data-delta="-1">−</button>
+                                    <output id="cChildren">0</output>
+                                    <button type="button" data-step-btn="children" data-delta="1">+</button>
+                                </div>
+                            </div>
+                            <div class="counter">
+                                <div><b>Em bé</b><small>dưới 2 tuổi — 20% giá tour</small></div>
+                                <div class="counter-ctrl">
+                                    <button type="button" data-step-btn="infants" data-delta="-1">−</button>
+                                    <output id="cInfants">0</output>
+                                    <button type="button" data-step-btn="infants" data-delta="1">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="check">
+            <input type="checkbox" id="bSingle" />
+            <span>Yêu cầu phòng đơn <small>(phụ thu <b id="singleFee">—</b>/người)</small></span>
+          </label>
+
+                        <label class="fld"><span>Ghi chú thêm</span>
+            <textarea id="bNote" rows="2" placeholder="Ăn chay, dị ứng, đi cùng người lớn tuổi…"></textarea>
+          </label>
+                    </section>
+
+                    <section class="step" data-step="2" hidden>
+                        <div class="grid-2">
+                            <label class="fld"><span>Họ và tên <i class="req" aria-hidden="true">*</i></span><input type="text" id="bName" placeholder="Nguyễn Văn A" required /></label>
+                            <label class="fld"><span>Số điện thoại <i class="req" aria-hidden="true">*</i></span><input type="tel" id="bPhone" placeholder="09xx xxx xxx" required /></label>
+                        </div>
+                        <label class="fld"><span>Email <i class="req" aria-hidden="true">*</i></span><input type="email" id="bEmail" placeholder="ban@email.com" required /></label>
+                        <label class="fld"><span>Địa chỉ (để xuất hoá đơn)</span><input type="text" id="bAddress" placeholder="Không bắt buộc" /></label>
+                        <div class="grid-2">
+                            <label class="fld"><span>Mã giảm giá</span>
+              <div class="coupon">
+                <input type="text" id="bCoupon" placeholder="VIVU10" />
+                <button type="button" class="btn btn--ghost btn--sm" id="applyCoupon">Áp dụng</button>
+              </div>
+              <small class="hint" id="couponMsg"></small>
+            </label>
+                            <label class="fld"><span>Hình thức thanh toán</span>
+              <select id="bPay">
+                <option value="transfer">Chuyển khoản (giữ chỗ 24h)</option>
+                <option value="office">Thanh toán tại văn phòng</option>
+                <option value="card">Thẻ tín dụng</option>
+              </select>
+            </label>
+                        </div>
+                    </section>
+
+                    <section class="step" data-step="3" hidden>
+                        <div class="confirm-box" id="confirmBox"></div>
+                        <label class="check">
+            <input type="checkbox" id="bAgree" required />
+            <span>Tôi đã đọc và đồng ý với điều kiện đặt tour, chính sách huỷ và hoàn tiền.</span>
+          </label>
+                    </section>
+
+                    <div class="summary" id="summary"></div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn--ghost" id="prevStep" hidden>Quay lại</button>
+                        <button type="button" class="btn btn--sun" id="nextStep">Tiếp tục</button>
+                        <button type="submit" class="btn btn--sun" id="submitBooking" hidden>Xác nhận đặt tour</button>
+                    </div>
+                </form>
+
+                <div class="success" id="successBox" hidden></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════ MODAL: ĐẶT CHỖ CỦA TÔI ══════════════════════════ -->
+    <div class="modal" id="myModal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-panel" role="dialog" aria-modal="true">
+            <button class="modal-x" data-close aria-label="Đóng">×</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">Đặt chỗ của tôi</h2>
+                <p class="modal-sub">Dữ liệu được lưu trên trình duyệt này.</p>
+                <div id="myList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════ MODAL: ĐĂNG NHẬP ══════════════════════════ -->
+    <div class="modal" id="loginModal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-panel modal-panel--slim" role="dialog" aria-modal="true" aria-labelledby="lgTitle">
+            <button class="modal-x" data-close aria-label="Đóng">×</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title" id="lgTitle">Đăng nhập</h2>
+                <p class="modal-sub">Đăng nhập để theo dõi đặt chỗ và nhận ưu đãi riêng.</p>
+                <form id="loginForm" novalidate>
+                    <label class="fld"><span>Email <i class="req" aria-hidden="true">*</i></span><input type="email" id="lgEmail" placeholder="ban@email.com" required /></label>
+                    <label class="fld"><span>Mật khẩu <i class="req" aria-hidden="true">*</i></span><input type="password" id="lgPass" placeholder="••••••••" required /></label>
+                    <div class="login-row">
+                        <label class="check" style="margin:0"><input type="checkbox" checked /><span>Ghi nhớ tôi</span></label>
+                        <a href="#" class="link-quiet">Quên mật khẩu?</a>
+                    </div>
+                    <button class="btn btn--sun btn--block" type="submit">Đăng nhập</button>
+                </form>
+                <!-- <a> chứ không phải <button>: đăng ký giờ là một TRANG có
+                     địa chỉ riêng, nên nó phải hành xử như một liên kết — mở
+                     tab mới bằng chuột giữa, chép được địa chỉ, back được.
+                     data-close lo phần đóng khung đăng nhập đang mở. -->
+                <p class="auth-swap">Chưa có tài khoản? <a href="#dang-ky" class="link-quiet" data-close>Đăng ký ngay</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script defer src="js/hero-motion.js"></script>
+    <script defer src="js/data.js"></script>
+    <script defer src="js/app.js"></script>
+    <!-- Tua video mở đầu theo cuộn. Đặt sau app.js: module tự cắm cờ
+     data-hero-scrub để app.js nhường quyền điều khiển <video>. -->
+    <script defer src="js/scroll-scrub.js"></script>
+
+    <!-- GSAP + ScrollTrigger: phần chữ của cảnh hành trình (cảnh 02).
+     defer để không chặn render; statement-motion.js cũng defer nên chạy sau. -->
+    <!-- Cảnh cảm nhận (cảnh 08). Cũng defer nên chạy sau hai thẻ GSAP ở trên, và
+     sau app.js — lúc này #reviewGrid đã có đủ bốn thẻ để gắn timeline. -->
+
+    <!-- Three.js cho phần canvas của chính cảnh đó. Nạp dạng ES module qua
+     importmap — importmap phải đứng TRƯỚC mọi <script type="module"> dùng tới
+     nó. travel-map.js chạy sau hai thẻ defer ở trên nên window.gsap đã sẵn
+     sàng, và cả hai module cùng gắn ScrollTrigger lên #flightMap. -->
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/" } }
+    </script>
+    <script defer src="js/lazy-scenes.js"></script>
+</body>
+
+</html>

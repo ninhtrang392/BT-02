@@ -1,0 +1,12 @@
+{
+  "basePath": "frames/hero",
+  "extension": "webp",
+  "pattern": "frame-00001.webp",
+  "frameCount": 122,
+  "version": "122-22958510",
+  "fps": 12,
+  "width": 1600,
+  "quality": 78,
+  "source": "video/hero 3.mp4",
+  "duration": 10.125
+}
