@@ -1,0 +1,60 @@
+{
+  "basePath": "images/travel-map/cutout",
+  "assets": [
+    {
+      "file": "01-ban-do-chau-a.png",
+      "width": 3072,
+      "height": 1728,
+      "aspect": 1.77778,
+      "keptPct": 100
+    },
+    {
+      "file": "02-viet-nam.png",
+      "width": 1024,
+      "height": 768,
+      "aspect": 1.33333,
+      "keptPct": 58.9,
+      "flat": false
+    },
+    {
+      "file": "03-thai-lan.png",
+      "width": 1024,
+      "height": 683,
+      "aspect": 1.49927,
+      "keptPct": 74.7,
+      "flat": false
+    },
+    {
+      "file": "04-trung-quoc.png",
+      "width": 1024,
+      "height": 768,
+      "aspect": 1.33333,
+      "keptPct": 64.2,
+      "flat": false
+    },
+    {
+      "file": "05-han-quoc.png",
+      "width": 1024,
+      "height": 768,
+      "aspect": 1.33333,
+      "keptPct": 67.1,
+      "flat": false
+    },
+    {
+      "file": "06-nhat-ban.png",
+      "width": 1024,
+      "height": 639,
+      "aspect": 1.6025,
+      "keptPct": 33,
+      "flat": true
+    },
+    {
+      "file": "07-may-bay.png",
+      "width": 1024,
+      "height": 768,
+      "aspect": 1.33333,
+      "keptPct": 43.5,
+      "flat": false
+    }
+  ]
+}
